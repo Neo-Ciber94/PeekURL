@@ -1,0 +1,17 @@
+services:
+
+  db:
+    image: postgres:14.4
+    restart: always
+    ports:
+      - 6000:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: sample
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 6001:8080

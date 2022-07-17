@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  uid          String     @unique
+  username     String
+  creationDate DateTime   @default(now())
+  urls         ShortUrl[]
+}
+
+model ShortUrl {
+  id              Int         @id @default(autoincrement())
+  originalUrl     String
+  shortUrl        String      @unique
+  logs            AccessLog[]
+  active          Boolean     @default(true)
+  createdByUserId Int
+  createdByUser   User        @relation(fields: [createdByUserId], references: [id])
+  creationDate    DateTime    @default(now())
+}
+
+model AccessLog {
+  id           Int      @id @default(autoincrement())
+  shortUrlId   Int
+  shortUrl     ShortUrl @relation(fields: [shortUrlId], references: [id])
+  ipAddress    String?
+  userAgent    String?
+  country      String?
+  city         String?
+  region       String?
+  latitude     Float?
+  longitude    Float?
+  creationDate DateTime @default(now())
+}
