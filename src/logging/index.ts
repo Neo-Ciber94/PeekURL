@@ -4,8 +4,8 @@ const logger = winston.createLogger({
     level: 'debug',
     format: winston.format.combine(
         winston.format.colorize(),
+        winston.format.timestamp(),
         winston.format.simple(),
-        winston.format.timestamp()
     ),
     transports: [
         new winston.transports.Console()

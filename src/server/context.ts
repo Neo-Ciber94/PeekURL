@@ -13,6 +13,8 @@ interface ContextResult {
 
 export type Context = trpc.inferAsyncReturnType<typeof createContext>;
 
+export type AuthorizedContext = Context & Required<Pick<Context, 'currentUserId'>>;
+
 /**
  * Creates context for an incoming request
  * @link https://trpc.io/docs/context
