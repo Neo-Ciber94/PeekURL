@@ -1,10 +1,15 @@
 import { withTRPC } from "@trpc/next";
 import { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
+import MainLayout from "../layout/MainLayout";
 import { AppRouter } from "../server/routers/app.router";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+  return (
+    <MainLayout>
+      <Component {...pageProps} />;
+    </MainLayout>
+  );
 };
 
 export default withTRPC<AppRouter>({

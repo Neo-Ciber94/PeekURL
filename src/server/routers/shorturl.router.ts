@@ -14,7 +14,10 @@ export const urlRouter = createProtectedRouter()
             const userId = ctx.currentUserId;
 
             try {
-                const shortUrl = shortenUrl(originalUrl);
+                const shortUrl = await shortenUrl({
+                    url: originalUrl
+                });
+
                 const result = await ctx.prisma.shortUrl.create({
                     data: {
                         originalUrl,
