@@ -1,21 +1,67 @@
-import { Box, Button } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
+import {
+  AppBar,
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  styled,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import Logo from "../components/Logo";
+import Link from "next/link";
+
+const StyledButton = styled(Button)({
+  '&': {
+    color: 'black',
+    fontSize: '16px',
+    width: 80,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)'
+  }
+})
 
 export default function Header() {
   return (
-    <Box display="flex" flexDirection="row">
-      <Button
-        sx={{
-          marginLeft: "auto",
-          display: "flex",
-          flexDirection: "row",
-          gap: 1,
-        }}
-        variant="contained"
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={{
+        backgroundColor: "white",
+      }}
+    >
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-between"
+        p={2}
       >
-        <LoginIcon />
-        Login
-      </Button>
-    </Box>
+        <IconButton size="large" edge="start" aria-label="menu" sx={{ mr: 2 }}>
+          <MenuIcon />
+        </IconButton>
+        <Logo />
+        <Box
+          sx={{
+            marginLeft: "auto",
+            display: "flex",
+            flexDirection: "row",
+            gap: 1,
+            px: 3,
+          }}
+        >
+          <Link href="/urls" passHref>
+            <StyledButton>URLS</StyledButton>
+          </Link>
+          <Link href="/login" passHref>
+            <StyledButton>Login</StyledButton>
+          </Link>
+        </Box>
+      </Box>
+      <Divider />
+    </AppBar>
   );
 }
