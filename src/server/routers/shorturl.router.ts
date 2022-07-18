@@ -45,7 +45,7 @@ export const urlRouter = createProtectedRouter()
         }),
         resolve: async ({ ctx, input }) => {
             const userId = ctx.currentUserId;
-            const shortenUrls = await ctx.prisma.shortUrl.findFirst({
+            const shortenUrls = await ctx.prisma.shortUrl.findMany({
                 where: {
                     active: true,
                     createdByUserId: userId,
