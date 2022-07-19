@@ -39,7 +39,14 @@ function DataTableHeader<T>({ columns }: DataTableHeaderProps<T>) {
     <TableHead>
       <TableRow>
         {columns.map((col, idx) => (
-          <TableCell key={idx}>{col.header}</TableCell>
+          <TableCell
+            key={idx}
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
+            {col.header}
+          </TableCell>
         ))}
       </TableRow>
     </TableHead>
@@ -60,7 +67,15 @@ function DataTableItems<T>({ columns, data, onClick }: DatTableItemProps<T>) {
   return (
     <>
       {data.map((item, colIndex) => (
-        <TableRow key={colIndex}>
+        <TableRow
+          key={colIndex}
+          sx={{
+            cursor: "pointer",
+            "&:hover": {
+              backgroundColor: "rgba(0, 0, 0, 0.05)",
+            },
+          }}
+        >
           {columns.map((col, idx) => (
             <TableCell
               key={idx}

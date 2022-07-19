@@ -1,4 +1,4 @@
-import { Badge } from "@mui/material";
+import { Badge, Box } from "@mui/material";
 import { AccessLog, ShortUrl } from "@prisma/client";
 import { DataTable, TableColumn } from "./DataTable/DataTable";
 import DoneIcon from "@mui/icons-material/Done";
@@ -13,7 +13,14 @@ type ShortUrlAndLogs = ShortUrl & {
 const columns: TableColumn<ShortUrlAndLogs>[] = [
   {
     header: "Short URL",
-    resolve: (e) => `${BASE_URL}${e.shortUrl}`,
+    resolve: (e) => (
+      <Box
+        whiteSpace={"nowrap"}
+        textOverflow="ellipsis"
+        overflow={"hidden"}
+        width={[200, 300, 200, 400]}
+      >{`${BASE_URL}${e.shortUrl}`}</Box>
+    ),
   },
   {
     header: "Domain",
