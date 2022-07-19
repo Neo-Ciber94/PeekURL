@@ -18,9 +18,6 @@ export class TimePassed {
 }
 
 export function getTimePassed(ref: Date, now: Date = new Date()): TimePassed {
-    console.log({
-        ref, now
-    })
     const nowMs = now.getTime();
     const refMs = ref.getTime();
     const ms = nowMs - refMs;

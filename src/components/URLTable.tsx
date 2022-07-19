@@ -1,7 +1,6 @@
 import { Badge, Box } from "@mui/material";
 import { AccessLog, ShortUrl } from "@prisma/client";
 import { DataTable, TableColumn } from "./DataTable/DataTable";
-import DoneIcon from "@mui/icons-material/Done";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getTimePassed } from "@utils/getPassedTime";
 import { BASE_URL } from "src/config";
