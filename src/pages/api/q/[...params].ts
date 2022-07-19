@@ -7,7 +7,7 @@ import logger from "../../../logging";
 const PATHNAME = "/api/q";
 
 const handler: NextApiHandler = async (req, res) => {
-    if (req.method !== "GET" || req.url == null) {
+    if (req.url == null) {
         return res.status(404).end();
     }
 
@@ -47,7 +47,7 @@ const handler: NextApiHandler = async (req, res) => {
         }
     });
 
-    logger.debug(`New access to ${shortenUrl.shortUrl} - ${access.ipAddress}`);
+    logger.debug(`[${req.method}] access to ${shortenUrl.shortUrl} - ${access.ipAddress}`);
 }
 
 function getIp(req: NextApiRequest): string | undefined {

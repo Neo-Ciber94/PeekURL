@@ -18,7 +18,7 @@ const columns: TableColumn<ShortUrlAndLogs>[] = [
         textOverflow="ellipsis"
         overflow={"hidden"}
         width={[200, 300, 200, 400]}
-      >{`${BASE_URL}${e.shortUrl}`}</Box>
+      >{`${BASE_URL}q${e.shortUrl}`}</Box>
     ),
   },
   {

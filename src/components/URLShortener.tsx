@@ -1,5 +1,5 @@
 import { Grid, TextField } from "@mui/material";
-import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from "@mui/lab/LoadingButton";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { trpc } from "../utils/trpc";
@@ -80,7 +80,6 @@ export default function URLShortener({
             variant="contained"
             disabled={!canGenerateUrl() || isLoading}
             loading={isLoading}
-            loadingPosition="start"
             sx={{ px: 2, width: "100%" }}
           >
             Shorten
