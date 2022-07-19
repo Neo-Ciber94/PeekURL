@@ -26,12 +26,22 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
 export default withTRPC<AppRouter>({
   config({ ctx }) {
+    if (typeof window !== "undefined") {
+      return {
+        transformer: superjson,
+        url: "/api/trpc",
+      };
+    }
+
     const url = `${API_URL}/trpc`;
 
     return {
       url,
       transformer: superjson,
       queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+      headers: {
+        "x-ssr": "1",
+      },
     };
   },
   ssr: true,

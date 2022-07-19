@@ -8,7 +8,7 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
 
     if (userId == null) {
         throw new TRPCError({
-            code: 'FORBIDDEN'
+            code: 'UNAUTHORIZED'
         })
     }
 
