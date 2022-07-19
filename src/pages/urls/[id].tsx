@@ -155,7 +155,14 @@ function Detail({ icon, title, children }: DetailProps) {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={9}>
+      <Grid
+        item
+        xs={9}
+        whiteSpace={"nowrap"}
+        overflow="hidden"
+        textOverflow="ellipsis"
+        width={[100, 300, 400]}
+      >
         {children}
       </Grid>
     </>
