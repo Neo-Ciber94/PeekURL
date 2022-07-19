@@ -9,23 +9,30 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../components/Logo";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const StyledButton = styled(Button)({
-  '&': {
-    color: 'black',
-    fontSize: '16px',
+  "&": {
+    color: "black",
+    fontSize: "16px",
     width: 80,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  '&:hover': {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)'
-  }
-})
+  "&:hover": {
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
+  },
+});
 
 export default function Header() {
+  const router = useRouter();
+
+  const handleGoToLogin = () => {
+    router.push("/login");
+  };
+
   return (
     <AppBar
       position="sticky"

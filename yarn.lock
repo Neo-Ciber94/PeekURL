@@ -3218,6 +3218,11 @@ react-query@^3.39.1:
     broadcast-channel "^3.4.1"
     match-sorter "^6.0.2"
 
+react-social-login-buttons@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/react-social-login-buttons/-/react-social-login-buttons-3.6.0.tgz#2be1cb114d8c0200581ba1c8ec5ea74e89cf7701"
+  integrity sha512-m5E72jHWgC4VBxRziZYQC5kQIzooGRF+dDE97K5JgSlcDPXkNxCjCzP+Qp9fNhNujG7APvPx2Qhzi1BO2xi17Q==
+
 react-ssr-prepass@^1.5.0:
   version "1.5.0"
   resolved "https://registry.npmjs.org/react-ssr-prepass/-/react-ssr-prepass-1.5.0.tgz"
