@@ -1,8 +1,4 @@
 import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Link as MaterialLink,
   Typography,
   Grid,
@@ -11,18 +7,22 @@ import {
 } from "@mui/material";
 import { AccessLog, ShortUrl } from "@prisma/client";
 import { trpc } from "@utils/trpc";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import PageCard from "src/components/PageCard";
 import LinkIcon from "@mui/icons-material/Link";
 import Loading from "src/components/Loading";
 import { BASE_URL } from "src/config";
-import { trpcSSG } from "@utils/trpcSSG";
 import { useRouter } from "next/router";
 import { getTimePassed } from "@utils/getPassedTime";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
-import InfoIcon from "@mui/icons-material/Info";
+import DnsIcon from "@mui/icons-material/Dns";
+import PublicIcon from "@mui/icons-material/Public";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import SouthAmericaIcon from "@mui/icons-material/SouthAmerica";
+import LanguageIcon from "@mui/icons-material/Language";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
 
 type ShortUrlWithLogs = ShortUrl & {
   logs: AccessLog[];
@@ -176,36 +176,40 @@ interface UrlAccessLogDetailProps {
 function UrlAccessLogDetail({ log }: UrlAccessLogDetailProps) {
   return (
     <>
-      <Detail icon={<InfoIcon />} title="IP">
+      <Detail icon={<DnsIcon />} title="IP">
         <Typography>{log.ipAddress || "N/A"}</Typography>
       </Detail>
 
-      <Detail icon={<InfoIcon />} title="Since">
+      <Detail icon={<AccessTimeIcon />} title="Since">
         <Typography>{getTimePassed(log.creationDate).toString()}</Typography>
       </Detail>
 
-      <Detail icon={<InfoIcon />} title="Date & time">
+      <Detail icon={<DateRangeIcon />} title="Date & time">
         <Typography>{log.creationDate.toString()}</Typography>
       </Detail>
 
-      <Detail icon={<InfoIcon />} title="Country">
+      <Detail icon={<PublicIcon />} title="Country">
         <Typography>{log.country || "N/A"}</Typography>
       </Detail>
 
-      <Detail icon={<InfoIcon />} title="City">
+      <Detail icon={<LocationCityIcon />} title="City">
         <Typography>{log.city || "N/A"}</Typography>
       </Detail>
 
-      <Detail icon={<InfoIcon />} title="Region">
+      <Detail icon={<SouthAmericaIcon />} title="Region">
         <Typography>{log.region || "N/A"}</Typography>
       </Detail>
 
-      <Detail icon={<InfoIcon />} title="Latitude">
+      <Detail icon={<LanguageIcon />} title="Latitude">
         <Typography>{log.latitude || "N/A"}</Typography>
       </Detail>
 
-      <Detail icon={<InfoIcon />} title="Longitude">
+      <Detail icon={<LanguageIcon />} title="Longitude">
         <Typography>{log.longitude || "N/A"}</Typography>
+      </Detail>
+
+      <Detail icon={<MobileScreenShareIcon />} title="User Agent">
+        <Typography>{log.userAgent || "N/A"}</Typography>
       </Detail>
 
       <Grid item xs={12} marginY={1}>
