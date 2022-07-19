@@ -1,6 +1,6 @@
 import URLList from "../../components/URLList";
 import { trpc } from "@utils/trpc";
-import CenteredCard from "src/components/CenteredCard";
+import CenteredCard from "src/components/PageCard";
 import Loading from "src/components/Loading";
 import { Typography } from "@mui/material";
 import URLTable from "src/components/URLTable";

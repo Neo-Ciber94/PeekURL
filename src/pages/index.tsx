@@ -10,7 +10,7 @@ import { useState } from "react";
 import URLShortener from "../components/URLShortener";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { BASE_URL } from "../config";
-import CenteredCard from "src/components/CenteredCard";
+import PageCard from "src/components/PageCard";
 
 export default function IndexPage() {
   const [shortURL, setShortURL] = useState<string | null>(null);
@@ -32,7 +32,7 @@ export default function IndexPage() {
   };
 
   return (
-    <CenteredCard height={300} px={[2, 5, 20]}>
+    <PageCard height={300} px={[2, 5, 10]}>
       <Typography variant="h5" mb={1}>
         Shorten an URL
       </Typography>
@@ -74,6 +74,6 @@ export default function IndexPage() {
           )}
         </URLShortener>
       </Box>
-    </CenteredCard>
+    </PageCard>
   );
 }
