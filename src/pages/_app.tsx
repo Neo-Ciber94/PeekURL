@@ -2,6 +2,8 @@ import { ThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline } from "@mui/material";
 import { withTRPC } from "@trpc/next";
 import { AppType } from "next/dist/shared/lib/utils";
+import Authorized from "src/components/Authorized";
+import { AuthContextProvider } from "src/contexts/AuthContext";
 import superjson from "superjson";
 import { API_URL } from "../config";
 import MainLayout from "../layout/MainLayout";
@@ -15,12 +17,16 @@ const darkTheme = createTheme({
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <MainLayout>
-        <Component {...pageProps} />
-      </MainLayout>
-    </ThemeProvider>
+    <AuthContextProvider>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <MainLayout>
+          <Authorized>
+            <Component {...pageProps} />
+          </Authorized>
+        </MainLayout>
+      </ThemeProvider>
+    </AuthContextProvider>
   );
 };
 

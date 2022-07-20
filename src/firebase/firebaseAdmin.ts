@@ -1,5 +1,5 @@
 import firebaseAdmin, { initializeApp, cert } from "firebase-admin/app";
-import serviceAccount from "private/firebase-secret.json";
+import serviceAccount from "../../private/firebase-secret.json";
 
 let app: firebaseAdmin.App | undefined;
 

@@ -1,7 +1,20 @@
 import { Box } from "@mui/material";
+import { useRouter } from "next/router";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import { useAuth } from "src/contexts/AuthContext";
 
 export default function LoginPage() {
+  const { login, user } = useAuth();
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    if (user) {
+      return;
+    }
+
+    await login();
+  };
+
   return (
     <Box
       height="50%"
@@ -12,7 +25,7 @@ export default function LoginPage() {
       py={25}
       px={[0, 0, 20, 30]}
     >
-      <GoogleLoginButton onClick={() => alert("Hello")} />
+      <GoogleLoginButton onClick={handleLogin} />
     </Box>
   );
 }
