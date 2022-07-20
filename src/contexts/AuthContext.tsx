@@ -53,6 +53,7 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
     try {
       await signInWithRedirect(auth, googleProvider);
       const redirect = await getRedirectResult(auth);
+      
       if (redirect) {
         setUser(redirect.user);
       }

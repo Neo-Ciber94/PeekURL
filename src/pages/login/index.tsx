@@ -5,7 +5,6 @@ import { useAuth } from "src/contexts/AuthContext";
 
 export default function LoginPage() {
   const { login, user } = useAuth();
-  const router = useRouter();
 
   const handleLogin = async () => {
     if (user) {
@@ -14,6 +13,10 @@ export default function LoginPage() {
 
     await login();
   };
+
+  if (user) {
+    return null;
+  }
 
   return (
     <Box

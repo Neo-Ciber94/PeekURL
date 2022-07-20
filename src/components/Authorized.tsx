@@ -8,17 +8,13 @@ const Authorized: React.FC<React.PropsWithChildren> = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-
     const init = async () => {
       if (user) {
         if (router.pathname === "/login") {
           await router.push("/");
         }
       } else {
-        if (router.pathname !== "/login") {
+        if (router.pathname !== "/login" && !isLoading) {
           await router.push("/login");
         }
       }
