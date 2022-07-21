@@ -12,25 +12,27 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
     const app = getFirebaseAdmin();
     const auth = getAuth(app);
 
-    const idToken = ""; // Get token from request
+    const idToken = ctx.req.cookies.idToken; // Get token from request
     let user: User | null = null;
 
-    try {
-        const { uid } = await auth.verifyIdToken(idToken, true);
-        user = await prisma.user.findFirst({ where: { uid } })
+    if (idToken) {
+        try {
+            const { uid } = await auth.verifyIdToken(idToken, true);
+            user = await prisma.user.findFirst({ where: { uid } })
 
-        // Use do not exists in the database
-        if (user == null) {
-            const { displayName, email } = await auth.getUser(uid);
-            const username = displayName || email || `peekurl:user-${uid}`;
+            // Use do not exists in the database
+            if (user == null) {
+                const { displayName, email } = await auth.getUser(uid);
+                const username = displayName || email || `peekurl:user-${uid}`;
 
-            user = await prisma.user.create({
-                data: { uid, username }
-            })
+                user = await prisma.user.create({
+                    data: { uid, username }
+                })
+            }
+
+        } catch (err) {
+            logger.error(err);
         }
-
-    } catch (err) {
-        logger.error(err);
     }
 
     if (user == null) {
@@ -40,7 +42,7 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
     }
 
     logger.info(`User ${user.username} logged`);
-    
+
     return next({
         ctx: {
             ...ctx,

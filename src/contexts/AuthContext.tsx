@@ -37,9 +37,11 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
   useEffect(() => {
     setIsLoading(true);
 
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
       setUser(user);
       setIsLoading(false);
+      
+      const idToken = await user?.getIdToken();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
