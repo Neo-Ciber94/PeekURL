@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id           String     @id @default(uuid())
+  id           String     @id @default(uuid()) @db.Uuid
   uid          String     @unique @db.Uuid
   username     String
   creationDate DateTime   @default(now())
@@ -16,7 +16,7 @@ model User {
 }
 
 model ShortUrl {
-  id              String      @id @default(uuid())
+  id              String      @id @default(uuid()) @db.Uuid
   originalUrl     String
   shortUrl        String      @unique
   logs            AccessLog[]
@@ -27,7 +27,7 @@ model ShortUrl {
 }
 
 model AccessLog {
-  id           String   @id @default(uuid())
+  id           String   @id @default(uuid()) @db.Uuid
   shortUrlId   String   @db.Uuid
   shortUrl     ShortUrl @relation(fields: [shortUrlId], references: [id])
   ipAddress    String?
