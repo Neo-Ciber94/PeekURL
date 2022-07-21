@@ -9,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { useValue } from "src/hooks/useValue";
+import { appStore } from "src/redux/store";
 
 export interface AuthContextProps {
   login: () => Promise<void>;
@@ -40,8 +41,9 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
     auth.onAuthStateChanged(async (user) => {
       setUser(user);
       setIsLoading(false);
-      
+
       const idToken = await user?.getIdToken();
+      appStore.idToken = idToken;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

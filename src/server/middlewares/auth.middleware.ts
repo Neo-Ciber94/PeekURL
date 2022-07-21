@@ -12,7 +12,7 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
     const app = getFirebaseAdmin();
     const auth = getAuth(app);
 
-    const idToken = ctx.req.cookies.idToken; // Get token from request
+    const idToken = ctx.req.headers.authorization; // Get token from request
     let user: User | null = null;
 
     if (idToken) {
