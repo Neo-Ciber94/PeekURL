@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL,
     "uid" TEXT NOT NULL,
     "username" TEXT NOT NULL,
     "creationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -10,11 +10,11 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "ShortUrl" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL,
     "originalUrl" TEXT NOT NULL,
     "shortUrl" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT true,
-    "createdByUserId" INTEGER NOT NULL,
+    "createdByUserId" UUID NOT NULL,
     "creationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ShortUrl_pkey" PRIMARY KEY ("id")
@@ -22,8 +22,8 @@ CREATE TABLE "ShortUrl" (
 
 -- CreateTable
 CREATE TABLE "AccessLog" (
-    "id" SERIAL NOT NULL,
-    "shortUrlId" INTEGER NOT NULL,
+    "id" UUID NOT NULL,
+    "shortUrlId" UUID NOT NULL,
     "ipAddress" TEXT,
     "userAgent" TEXT,
     "country" TEXT,

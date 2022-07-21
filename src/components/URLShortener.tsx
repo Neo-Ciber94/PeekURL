@@ -51,7 +51,6 @@ export default function URLShortener({
         url: generate.url,
       });
 
-      console.log(result);
       onChange(result.shortUrl);
     } catch (err) {
       console.error(err);

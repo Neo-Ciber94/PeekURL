@@ -1,6 +1,7 @@
 import firebase, { initializeApp } from "firebase/app";
 import firebaseAnalytics from "firebase/analytics";
 import { Analytics } from "firebase/analytics";
+import logger from "src/logging";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIRE_BASE_API_KEY,
@@ -17,7 +18,7 @@ let analytics: Analytics | undefined;
 
 if (app == null && analytics == null) {
     app = initializeApp(firebaseConfig);
-    console.log("Initialized client side firebase");
+    logger.info("Initialized client side firebase")
 }
 
 export function getFirebaseApp() {

@@ -33,14 +33,16 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
 export default withTRPC<AppRouter>({
   config({ ctx }) {
-    const idToken = appStore.idToken;
-
     if (typeof window !== "undefined") {
       return {
         transformer: superjson,
         url: "/api/trpc",
-        headers: {
-          authorization: idToken,
+        headers() {
+          const idToken = appStore.idToken;
+
+          return {
+            authorization: idToken,
+          };
         },
       };
     }
@@ -51,9 +53,13 @@ export default withTRPC<AppRouter>({
       url,
       transformer: superjson,
       queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
-      headers: {
-        "x-ssr": "1",
-        authorization: idToken,
+      headers() {
+        const idToken = appStore.idToken;
+
+        return {
+          authorization: idToken,
+          "x-ssr": "1",
+        };
       },
     };
   },
