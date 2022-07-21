@@ -9,7 +9,6 @@ import {
   signOut,
 } from "firebase/auth";
 import { useValue } from "src/hooks/useValue";
-import { useRouter } from "next/router";
 
 export interface AuthContextProps {
   login: () => Promise<void>;
@@ -30,7 +29,6 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
   const auth = useValue(() => {
     const app = getFirebaseApp();
     return getAuth(app);
@@ -53,7 +51,7 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
     try {
       await signInWithRedirect(auth, googleProvider);
       const redirect = await getRedirectResult(auth);
-      
+
       if (redirect) {
         setUser(redirect.user);
       }

@@ -60,7 +60,7 @@ export const urlRouter = createProtectedRouter()
     })
     .query('.get_by_id', {
         input: z.object({
-            id: z.number(),
+            id: z.string(),
             includeLogs: z.boolean().optional().default(false)
         }),
         resolve: async ({ ctx, input }) => {

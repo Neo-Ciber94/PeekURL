@@ -67,10 +67,7 @@ type ShortUrlWithLogs = ShortUrl & {
 export default function UrlPage() {
   const { query } = useRouter();
   const id = query?.id as string;
-  const { data, isLoading } = trpc.useQuery([
-    "shorturl.get_by_id",
-    { id: Number(id), includeLogs: true },
-  ]);
+  const { data, isLoading } = trpc.useQuery(["shorturl.get_by_id", { id }]);
 
   return (
     <PageCard p={4}>

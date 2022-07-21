@@ -8,7 +8,7 @@ interface ContextResult {
     prisma: PrismaClient
     req: NextApiRequest,
     res: NextApiResponse
-    currentUserId?: number
+    currentUserId?: string
 }
 
 export type Context = trpc.inferAsyncReturnType<typeof createContext>;
@@ -27,7 +27,6 @@ export async function createContext(
     return {
         req,
         res,
-        prisma: prismaInstance,
-        currentUserId: 1,
+        prisma: prismaInstance
     }
 }

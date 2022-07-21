@@ -8,27 +8,27 @@ datasource db {
 }
 
 model User {
-  id           Int        @id @default(autoincrement())
-  uid          String     @unique
+  id           String     @id @default(uuid())
+  uid          String     @unique @db.Uuid
   username     String
   creationDate DateTime   @default(now())
   urls         ShortUrl[]
 }
 
 model ShortUrl {
-  id              Int         @id @default(autoincrement())
+  id              String      @id @default(uuid())
   originalUrl     String
   shortUrl        String      @unique
   logs            AccessLog[]
   active          Boolean     @default(true)
-  createdByUserId Int
+  createdByUserId String      @db.Uuid
   createdByUser   User        @relation(fields: [createdByUserId], references: [id])
   creationDate    DateTime    @default(now())
 }
 
 model AccessLog {
-  id           Int      @id @default(autoincrement())
-  shortUrlId   Int
+  id           String   @id @default(uuid())
+  shortUrlId   String   @db.Uuid
   shortUrl     ShortUrl @relation(fields: [shortUrlId], references: [id])
   ipAddress    String?
   userAgent    String?
