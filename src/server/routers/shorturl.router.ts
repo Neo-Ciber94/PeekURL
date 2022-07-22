@@ -59,6 +59,9 @@ export const urlRouter = createProtectedRouter()
                             logs: true
                         }
                     }
+                },
+                orderBy: {
+                    creationDate: 'desc',
                 }
             });
 
@@ -80,13 +83,17 @@ export const urlRouter = createProtectedRouter()
                     createdByUserId: userId,
                 },
                 include: {
-                    logs: input.includeLogs,
+                    logs: {
+                        orderBy: {
+                            creationDate: 'desc'
+                        }
+                    },
                     _count: input.includeCount && {
                         select: {
                             logs: true
                         }
                     }
-                }
+                },
             });
 
             if (shortenUrl == null) {
@@ -114,7 +121,11 @@ export const urlRouter = createProtectedRouter()
                     shortUrl: input.shortUrl
                 },
                 include: {
-                    logs: input.includeLogs,
+                    logs: {
+                        orderBy: {
+                            creationDate: 'desc'
+                        }
+                    },
                     _count: input.includeCount && {
                         select: {
                             logs: true
