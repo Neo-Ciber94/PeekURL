@@ -1,16 +1,6 @@
-import {
-  Link as MaterialLink,
-  Typography,
-  Grid,
-  Box,
-  Divider,
-} from "@mui/material";
+import { Link as MaterialLink, Typography, Grid, Divider } from "@mui/material";
 import { AccessLog } from "@prisma/client";
-import { trpc } from "@utils/trpc";
-import PageCard from "src/components/PageCard";
 import LinkIcon from "@mui/icons-material/Link";
-import Loading from "src/components/Loading";
-import { useRouter } from "next/router";
 import { getTimePassed } from "@utils/getPassedTime";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import VisibilityIcon from "@mui/icons-material/Visibility";
