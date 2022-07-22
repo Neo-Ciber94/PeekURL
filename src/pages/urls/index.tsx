@@ -11,7 +11,7 @@ export default function UrlListPage() {
 
   const { data, isLoading, isError } = trpc.useQuery([
     "shorturl.get_all",
-    { includeLogs: true },
+    { includeCount: true },
   ]);
 
   const handleUrlClick = (url: ShortUrl) => {

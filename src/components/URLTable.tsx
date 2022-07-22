@@ -1,15 +1,11 @@
 import { Badge, Box } from "@mui/material";
-import { AccessLog, ShortUrl } from "@prisma/client";
 import { DataTable, TableColumn } from "./DataTable/DataTable";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getTimePassed } from "@utils/getPassedTime";
 import { BASE_URL } from "src/config";
+import { ShortUrlWithLogs } from "src/types/shorturl";
 
-type ShortUrlAndLogs = ShortUrl & {
-  logs: AccessLog[] | null;
-};
-
-const columns: TableColumn<ShortUrlAndLogs>[] = [
+const columns: TableColumn<ShortUrlWithLogs>[] = [
   {
     header: "Short URL",
     resolve: (e) => (
@@ -42,7 +38,7 @@ const columns: TableColumn<ShortUrlAndLogs>[] = [
       <Badge
         showZero
         color="secondary"
-        badgeContent={e.logs?.length || 0}
+        badgeContent={e._count?.logs || 0}
         max={999}
       >
         <VisibilityIcon />
@@ -52,8 +48,8 @@ const columns: TableColumn<ShortUrlAndLogs>[] = [
 ];
 
 export interface URLTableProps {
-  urls: ShortUrlAndLogs[];
-  onClick: (item: ShortUrlAndLogs) => void;
+  urls: ShortUrlWithLogs[];
+  onClick: (item: ShortUrlWithLogs) => void;
 }
 
 export default function URLTable({ urls, onClick }: URLTableProps) {

@@ -9,7 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { useValue } from "src/hooks/useValue";
-import { store, useAppDispatch } from "src/redux/store";
+import { useAppDispatch } from "src/redux/store";
 import { idTokenActions } from "src/redux/slices/id-token.slice";
 
 export interface AuthContextProps {

@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { ShortUrlWithLogs } from "src/types/shorturl";
 import { z } from "zod";
 import logger from "../../logging";
 import { shortenUrl } from "../../utils/shortenUrl";
@@ -30,7 +31,7 @@ export const urlRouter = createProtectedRouter()
 
                 return result;
             } catch (e) {
-                console.error(e);
+                logger.error(e);
 
                 throw new TRPCError({
                     code: 'BAD_REQUEST',
@@ -41,7 +42,8 @@ export const urlRouter = createProtectedRouter()
     })
     .query('.get_all', {
         input: z.object({
-            includeLogs: z.boolean().optional().default(false)
+            includeLogs: z.boolean().optional().default(false),
+            includeCount: z.boolean().optional().default(false)
         }),
         resolve: async ({ ctx, input }) => {
             const userId = ctx.currentUserId;
@@ -52,16 +54,22 @@ export const urlRouter = createProtectedRouter()
                 },
                 include: {
                     logs: input.includeLogs,
+                    _count: input.includeCount && {
+                        select: {
+                            logs: true
+                        }
+                    }
                 }
             });
 
-            return shortenUrls;
+            return shortenUrls as ShortUrlWithLogs[]
         }
     })
     .query('.get_by_id', {
         input: z.object({
             id: z.string(),
-            includeLogs: z.boolean().optional().default(false)
+            includeLogs: z.boolean().optional().default(false),
+            includeCount: z.boolean().optional().default(false)
         }),
         resolve: async ({ ctx, input }) => {
             const userId = ctx.currentUserId;
@@ -73,6 +81,11 @@ export const urlRouter = createProtectedRouter()
                 },
                 include: {
                     logs: input.includeLogs,
+                    _count: input.includeCount && {
+                        select: {
+                            logs: true
+                        }
+                    }
                 }
             });
 
@@ -83,11 +96,15 @@ export const urlRouter = createProtectedRouter()
                 })
             }
 
-            return shortenUrl;
+            return shortenUrl as ShortUrlWithLogs;
         }
     })
     .query('.get_by_url', {
-        input: z.object({ shortUrl: z.string(), includeLogs: z.boolean().optional().default(false) }),
+        input: z.object({
+            shortUrl: z.string(),
+            includeLogs: z.boolean().optional().default(false),
+            includeCount: z.boolean().optional().default(false)
+        }),
         resolve: async ({ ctx, input }) => {
             const userId = ctx.currentUserId;
             const shortenUrl = await ctx.prisma.shortUrl.findFirst({
@@ -98,6 +115,11 @@ export const urlRouter = createProtectedRouter()
                 },
                 include: {
                     logs: input.includeLogs,
+                    _count: input.includeCount && {
+                        select: {
+                            logs: true
+                        }
+                    }
                 }
             });
 
@@ -108,6 +130,6 @@ export const urlRouter = createProtectedRouter()
                 })
             }
 
-            return shortenUrl;
+            return shortenUrl as ShortUrlWithLogs;
         }
     })
