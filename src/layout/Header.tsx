@@ -79,11 +79,6 @@ export default function Header() {
           <Link href="/urls" passHref>
             <StyledButton>URLS</StyledButton>
           </Link>
-          {!user && (
-            <Link href="/login" passHref>
-              <StyledButton>Login</StyledButton>
-            </Link>
-          )}
           {user && (
             <>
               <Avatar
