@@ -9,7 +9,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { useValue } from "src/hooks/useValue";
-import { appStore } from "src/redux/store";
+import { store, useAppDispatch } from "src/redux/store";
+import { idTokenActions } from "src/redux/slices/id-token.slice";
 
 export interface AuthContextProps {
   login: () => Promise<void>;
@@ -29,6 +30,7 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const dispatcher = useAppDispatch();
   const [user, setUser] = useState<User | null>(null);
   const auth = useValue(() => {
     const app = getFirebaseApp();
@@ -43,7 +45,14 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
       setIsLoading(false);
 
       const idToken = await user?.getIdToken();
-      appStore.idToken = idToken;
+
+      if (idToken) {
+        dispatcher(
+          idTokenActions.saveToken({
+            idToken,
+          })
+        );
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
