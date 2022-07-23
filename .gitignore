@@ -12,7 +12,7 @@
 private/
 
 # Environment
-.env
+.env*
 !.env.sample
 
 # next.js
