@@ -58,7 +58,7 @@ export default function Header() {
       position="sticky"
       elevation={0}
       sx={{
-        backgroundColor: isDarkMode ? "palette.background.paper" : "white",
+        backgroundColor: "transparent",
       }}
     >
       <Box
@@ -85,7 +85,7 @@ export default function Header() {
             <IconButton
               onClick={toggleColorMode}
               sx={{
-                color: isDarkMode ? "white" : "black",
+                color: "palette.text.primary",
               }}
             >
               {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}

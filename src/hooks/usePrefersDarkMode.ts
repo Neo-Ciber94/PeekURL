@@ -23,7 +23,6 @@ export function usePrefersDarkMode() {
     const handleSetPrefersDarkMode = (value: boolean) => {
         setPrefersDarkMode(value);
 
-        console.log({ value })
         if (value) {
             localStorage.setItem(COLOR_SCHEMA_MODE, "dark");
         } else {
