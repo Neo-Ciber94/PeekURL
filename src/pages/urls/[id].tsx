@@ -29,7 +29,7 @@ export default function UrlPage() {
         {data && <ShortUrlDetails data={data} />}
       </PageCard>
 
-      {data && (
+      {data && data.logs && data.logs.length > 0 && (
         <PageCard p={4}>
           <ShortUrlLogDetails logs={data.logs || []} />
         </PageCard>

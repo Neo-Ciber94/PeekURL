@@ -58,7 +58,7 @@ export default function Header() {
       position="sticky"
       elevation={0}
       sx={{
-        backgroundColor: "transparent",
+        backgroundColor: isDarkMode ? "palette.background.default" : "white",
       }}
     >
       <Box
