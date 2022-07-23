@@ -7,6 +7,7 @@ import ClientOnly from "src/components/ClientOnly";
 import { AuthContextProvider } from "src/contexts/AuthContext";
 import { ColorModeProvider } from "src/contexts/ColorModeContext";
 import { store } from "src/redux/store";
+import { getUserIdToken } from "src/redux/utils/getUserIdToken";
 import superjson from "superjson";
 import { API_URL } from "../config";
 import MainLayout from "../layout/MainLayout";
@@ -38,9 +39,8 @@ export default withTRPC<AppRouter>({
       return {
         transformer: superjson,
         url: "/api/trpc",
-        headers() {
-          const idToken = store.getState().idTokenReducer.idToken || undefined;
-
+        async headers() {
+          const idToken = await getUserIdToken();
           return {
             authorization: idToken,
           };
@@ -54,8 +54,8 @@ export default withTRPC<AppRouter>({
       url,
       transformer: superjson,
       queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
-      headers() {
-        const idToken = store.getState().idTokenReducer.idToken || undefined;
+      async headers() {
+        const idToken = await getUserIdToken();
 
         return {
           authorization: idToken,

@@ -8,7 +8,7 @@ export interface DetailProps extends React.PropsWithChildren {
 export function Detail({ icon, title, children }: DetailProps) {
   return (
     <>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <Box display="flex" flexDirection="row" alignContent="center" gap={2}>
           {icon}
           <Typography component="span" fontWeight="bold">
@@ -18,7 +18,8 @@ export function Detail({ icon, title, children }: DetailProps) {
       </Grid>
       <Grid
         item
-        xs={9}
+        xs={12}
+        md={9}
         whiteSpace={"nowrap"}
         overflow="hidden"
         textOverflow="ellipsis"

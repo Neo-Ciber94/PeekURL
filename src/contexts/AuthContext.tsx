@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { useValue } from "src/hooks/useValue";
 import { useAppDispatch } from "src/redux/store";
-import { idTokenActions } from "src/redux/slices/id-token.slice";
+import { userActions } from "src/redux/slices/user.slice";
 
 export interface AuthContextProps {
   login: () => Promise<void>;
@@ -44,14 +44,8 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
       setUser(user);
       setIsLoading(false);
 
-      const idToken = await user?.getIdToken();
-
-      if (idToken) {
-        dispatcher(
-          idTokenActions.saveToken({
-            idToken,
-          })
-        );
+      if (user) {
+        dispatcher(userActions.initialize({ user }));
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,6 +73,7 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
     try {
       await signOut(auth);
       setUser(null);
+      dispatcher(userActions.logout());
     } finally {
       setIsLoading(false);
     }

@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { idTokenReducer } from "./slices/id-token.slice";
+import { userReducer } from "./slices/user.slice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
     reducer: {
-        idTokenReducer: idTokenReducer
+        userReducer: userReducer
     }
 })
 
