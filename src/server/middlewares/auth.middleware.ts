@@ -41,8 +41,6 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
         })
     }
 
-    logger.info(`User ${user.username} logged`);
-
     return next({
         ctx: {
             ...ctx,
