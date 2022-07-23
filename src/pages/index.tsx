@@ -11,6 +11,7 @@ import URLShortener from "../components/URLShortener";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { BASE_URL } from "../config";
 import PageCard from "src/components/PageCard";
+import PageTitle from "src/components/PageHead";
 
 export default function IndexPage() {
   const [shortURL, setShortURL] = useState<string | null>(null);
@@ -32,48 +33,51 @@ export default function IndexPage() {
   };
 
   return (
-    <PageCard height={300} px={[2, 5, 10]}>
-      <Typography variant="h5" mb={1}>
-        Shorten an URL
-      </Typography>
-      <Box display="flex" justifyContent={"center"} alignItems="center">
-        <URLShortener onChange={handleChangeURL}>
-          {shortURL && (
-            <>
-              <Grid item xs={12} sm={9}>
-                <Box
-                  whiteSpace="nowrap"
-                  overflow="hidden"
-                  textOverflow="ellipsis"
-                >
-                  <MaterialLink
-                    variant="h6"
-                    href={shortURL}
-                    target="_blank"
-                    rel="noopener"
+    <>
+      <PageTitle name="Shorten URL" />
+      <PageCard height={300} px={[2, 5, 10]}>
+        <Typography variant="h5" mb={1}>
+          Shorten an URL
+        </Typography>
+        <Box display="flex" justifyContent={"center"} alignItems="center">
+          <URLShortener onChange={handleChangeURL}>
+            {shortURL && (
+              <>
+                <Grid item xs={12} sm={9}>
+                  <Box
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
                   >
-                    {shortURL}
-                  </MaterialLink>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <Tooltip title="Copied" open={copiedTooltipOpen} arrow>
-                  <Button
-                    sx={{
-                      width: "100%",
-                    }}
-                    color="secondary"
-                    onClick={handleCopyUrl}
-                  >
-                    <ContentCopyIcon />
-                    <Typography>Copy</Typography>
-                  </Button>
-                </Tooltip>
-              </Grid>
-            </>
-          )}
-        </URLShortener>
-      </Box>
-    </PageCard>
+                    <MaterialLink
+                      variant="h6"
+                      href={shortURL}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      {shortURL}
+                    </MaterialLink>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <Tooltip title="Copied" open={copiedTooltipOpen} arrow>
+                    <Button
+                      sx={{
+                        width: "100%",
+                      }}
+                      color="secondary"
+                      onClick={handleCopyUrl}
+                    >
+                      <ContentCopyIcon />
+                      <Typography>Copy</Typography>
+                    </Button>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+          </URLShortener>
+        </Box>
+      </PageCard>
+    </>
   );
 }

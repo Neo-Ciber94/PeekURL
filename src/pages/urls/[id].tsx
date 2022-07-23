@@ -7,6 +7,7 @@ import {
   ShortUrlDetails,
   ShortUrlLogDetails,
 } from "src/components/ShortUrlDetails";
+import PageTitle from "src/components/PageHead";
 
 export default function UrlPage() {
   const { query } = useRouter();
@@ -21,6 +22,7 @@ export default function UrlPage() {
 
   return (
     <>
+      <PageTitle name="View URL" />
       <PageCard p={4}>
         <Typography variant="h5" mb={1}>
           URL - {`${id}`}

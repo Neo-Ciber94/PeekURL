@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import URLTable from "src/components/URLTable";
 import { ShortUrl } from "@prisma/client";
 import { useRouter } from "next/router";
+import PageTitle from "src/components/PageHead";
 
 export default function UrlListPage() {
   const router = useRouter();
@@ -19,12 +20,17 @@ export default function UrlListPage() {
   };
 
   return (
-    <PageCard p={4}>
-      <Typography variant="h5" mb={1}>
-        My URLS
-      </Typography>
-      {isLoading && <Loading />}
-      {!isLoading && data && <URLTable urls={data} onClick={handleUrlClick} />}
-    </PageCard>
+    <>
+      <PageTitle name="My URLs" />
+      <PageCard p={4}>
+        <Typography variant="h5" mb={1}>
+          My URLS
+        </Typography>
+        {isLoading && <Loading />}
+        {!isLoading && data && (
+          <URLTable urls={data} onClick={handleUrlClick} />
+        )}
+      </PageCard>
+    </>
   );
 }

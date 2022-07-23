@@ -1,9 +1,9 @@
-import { Box, styled } from "@mui/material";
-import React, { CSSProperties, useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import React from "react";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import PageTitle from "src/components/PageHead";
 import { useAuth } from "src/contexts/AuthContext";
 import { useIsDarkMode } from "src/contexts/ColorModeContext";
-
 
 export default function LoginPage() {
   const { login, user } = useAuth();
@@ -22,19 +22,22 @@ export default function LoginPage() {
   }
 
   return (
-    <Box
-      height="50%"
-      width="100%"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      py={25}
-      px={[0, 0, 20, 30]}
-    >
-      <GoogleLoginButton
-        className={isDarkMode ? "google-login-dark-button" : undefined}
-        onClick={handleLogin}
-      />
-    </Box>
+    <>
+      <PageTitle name="Login" />
+      <Box
+        height="50%"
+        width="100%"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        py={25}
+        px={[0, 0, 20, 30]}
+      >
+        <GoogleLoginButton
+          className={isDarkMode ? "google-login-dark-button" : undefined}
+          onClick={handleLogin}
+        />
+      </Box>
+    </>
   );
 }
