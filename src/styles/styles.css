@@ -7,7 +7,7 @@ body {
 }
 
 button.google-login-dark-button {
-  background-color: rgba(0, 0, 0, 0) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
   transition: background-color 500ms;
   color: white !important;
 }
