@@ -1,6 +1,5 @@
 import { NextApiHandler, NextApiRequest } from "next";
 import prismaInstance from "../../../database/prisma";
-import path from "path";
 import * as geoip from 'geoip-lite';
 import logger from "../../../logging";
 
@@ -24,6 +23,8 @@ const handler: NextApiHandler = async (req, res) => {
     if (shortenUrl == null) {
         return res.status(404).end();
     }
+
+    logger.debug(req.headers);
 
     // Redirect
     res.redirect(shortenUrl.originalUrl);
