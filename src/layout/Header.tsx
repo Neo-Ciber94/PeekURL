@@ -16,6 +16,7 @@ import { useState } from "react";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useColorMode, useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useRouter } from "next/router";
 
 const StyledButton = styled(Button)({
   "&": {
@@ -35,7 +36,8 @@ const StyledButton = styled(Button)({
 export default function Header() {
   const { logout, user } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { toggleColorMode, mode: colorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
+  const { pathname } = useRouter();
   const isDarkMode = useIsDarkMode();
   const open = Boolean(anchorEl);
 
@@ -87,6 +89,12 @@ export default function Header() {
               {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
           </Box>
+
+          {!user && pathname !== "/login" && (
+            <Link href="/login" passHref>
+              <StyledButton>Login</StyledButton>
+            </Link>
+          )}
 
           {user && (
             <>

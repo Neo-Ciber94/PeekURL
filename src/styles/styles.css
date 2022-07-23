@@ -1,4 +1,3 @@
-
 header {
   transition: background-color 500ms !important;
 }
@@ -8,10 +7,11 @@ body {
 }
 
 button.google-login-dark-button {
-  background-color: #252525 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  transition: background-color 500ms;
   color: white !important;
 }
 
 button.google-login-dark-button:hover {
-  background-color: #1b1b1b !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
