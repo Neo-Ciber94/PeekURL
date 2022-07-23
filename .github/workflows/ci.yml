@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  ci:
 
     runs-on: ubuntu-latest
 
@@ -24,7 +24,7 @@ jobs:
         cache: 'npm'
         
     # Install packages
-    - run: npm ci
+    - run: npm install
     
     # Run tests
     - run: npm test
