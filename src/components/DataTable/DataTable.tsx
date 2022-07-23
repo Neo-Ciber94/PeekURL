@@ -72,7 +72,7 @@ function DataTableItems<T>({ columns, data, onClick }: DatTableItemProps<T>) {
           sx={{
             cursor: "pointer",
             "&:hover": {
-              backgroundColor: "rgba(0, 0, 0, 0.05)",
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
             },
           }}
         >
