@@ -4,33 +4,32 @@ import { withTRPC } from "@trpc/next";
 import { AppType } from "next/dist/shared/lib/utils";
 import { Provider } from "react-redux";
 import Authorized from "src/components/Authorized";
+import ClientOnly from "src/components/ClientOnly";
 import { AuthContextProvider } from "src/contexts/AuthContext";
+import { ColorModeProvider } from "src/contexts/ColorModeContext";
 import { store } from "src/redux/store";
 import superjson from "superjson";
 import { API_URL } from "../config";
 import MainLayout from "../layout/MainLayout";
 import { AppRouter } from "../server/routers/app.router";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
+import "../styles/GoogleLoginButton.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <Provider store={store}>
-      <AuthContextProvider>
-        <ThemeProvider theme={darkTheme}>
-          <CssBaseline />
-          <MainLayout>
-            <Authorized>
-              <Component {...pageProps} />
-            </Authorized>
-          </MainLayout>
-        </ThemeProvider>
-      </AuthContextProvider>
-    </Provider>
+    <ClientOnly>
+      <Provider store={store}>
+        <ColorModeProvider>
+          <AuthContextProvider>
+            <CssBaseline />
+            <MainLayout>
+              <Authorized>
+                <Component {...pageProps} />
+              </Authorized>
+            </MainLayout>
+          </AuthContextProvider>
+        </ColorModeProvider>
+      </Provider>
+    </ClientOnly>
   );
 };
 

@@ -1,10 +1,13 @@
-import { Box } from "@mui/material";
-import { useRouter } from "next/router";
+import { Box, styled } from "@mui/material";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useAuth } from "src/contexts/AuthContext";
+import { useIsDarkMode } from "src/contexts/ColorModeContext";
+
 
 export default function LoginPage() {
   const { login, user } = useAuth();
+  const isDarkMode = useIsDarkMode();
 
   const handleLogin = async () => {
     if (user) {
@@ -28,7 +31,10 @@ export default function LoginPage() {
       py={25}
       px={[0, 0, 20, 30]}
     >
-      <GoogleLoginButton onClick={handleLogin} />
+      <GoogleLoginButton
+        className={isDarkMode ? "google-login-dark-button" : undefined}
+        onClick={handleLogin}
+      />
     </Box>
   );
 }

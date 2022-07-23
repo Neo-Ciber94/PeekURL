@@ -1,0 +1,8 @@
+button.google-login-dark-button {
+  background-color: #252525 !important;
+  color: white !important;
+}
+
+button.google-login-dark-button:hover {
+  background-color: #1b1b1b !important;
+}
