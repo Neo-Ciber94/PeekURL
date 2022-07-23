@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@emotion/react";
-import { createTheme, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { withTRPC } from "@trpc/next";
 import { AppType } from "next/dist/shared/lib/utils";
 import { Provider } from "react-redux";
@@ -12,7 +11,7 @@ import superjson from "superjson";
 import { API_URL } from "../config";
 import MainLayout from "../layout/MainLayout";
 import { AppRouter } from "../server/routers/app.router";
-import "../styles/GoogleLoginButton.css";
+import "../styles/styles.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (

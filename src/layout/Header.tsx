@@ -9,7 +9,6 @@ import {
   MenuItem,
   styled,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../components/Logo";
 import Link from "next/link";
 import { useAuth } from "src/contexts/AuthContext";
@@ -67,9 +66,6 @@ export default function Header() {
         justifyContent="space-between"
         p={2}
       >
-        {/* <IconButton size="large" edge="start" aria-label="menu" sx={{ mr: 2 }}>
-          <MenuIcon />
-        </IconButton> */}
         <Logo />
         <Box
           sx={{
