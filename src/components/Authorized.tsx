@@ -1,14 +1,34 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useAuth } from "src/contexts/AuthContext";
 import Loading from "./Loading";
 
-const Authorized: React.FC<React.PropsWithChildren> = ({ children }) => {
+export interface AuthorizedProps extends React.PropsWithChildren {
+  ignoreRoutes?: string[];
+  onLoading?: React.ReactNode;
+  onRedirecting?: React.ReactNode;
+}
+
+const Authorized: React.FC<AuthorizedProps> = ({ children, ...rest }) => {
   const { user, isLoading } = useAuth();
+  const {
+    ignoreRoutes = [],
+    onLoading = <Loading />,
+    onRedirecting = null,
+  } = rest;
   const router = useRouter();
 
+  const requiresAuth = useCallback(
+    (route: string) => !ignoreRoutes.includes(route),
+    [ignoreRoutes]
+  );
+
   useEffect(() => {
-    const init = async () => {
+    if (!requiresAuth(router.pathname)) {
+      return;
+    }
+
+    const redirect = async () => {
       if (user) {
         if (router.pathname === "/login") {
           await router.push("/");
@@ -20,15 +40,16 @@ const Authorized: React.FC<React.PropsWithChildren> = ({ children }) => {
       }
     };
 
-    init();
-  }, [isLoading, router, user]);
+    redirect();
+  }, [requiresAuth, isLoading, router, user]);
 
   if (isLoading) {
-    return <Loading />;
+    return <>{onLoading}</>;
   }
 
-  if (user == null && router.pathname !== "/login") {
-    return null;
+  // prettier-ignore
+  if (requiresAuth(router.pathname) && user == null && router.pathname !== "/login") {
+    return <>{onRedirecting}</>;
   }
 
   return <>{children}</>;
