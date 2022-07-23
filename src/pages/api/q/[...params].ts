@@ -1,6 +1,6 @@
 import { NextApiHandler, NextApiRequest } from "next";
 import prismaInstance from "../../../database/prisma";
-import * as geoip from 'geoip-lite';
+import { lookup } from 'geoip-lite';
 import logger from "../../../logging";
 
 const PATHNAME = "/api/q";
@@ -33,7 +33,7 @@ const handler: NextApiHandler = async (req, res) => {
 
     const ipAddress = getIp(req);
     const userAgent = getUserAgent(req);
-    const geo = ipAddress ? geoip.lookup(ipAddress) : null;
+    const geo = ipAddress ? lookup(ipAddress) : null;
 
     const access = await prisma.accessLog.create({
         data: {
