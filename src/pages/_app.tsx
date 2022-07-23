@@ -7,7 +7,7 @@ import ClientOnly from "src/components/ClientOnly";
 import { AuthContextProvider } from "src/contexts/AuthContext";
 import { ColorModeProvider } from "src/contexts/ColorModeContext";
 import { store } from "src/redux/store";
-import { getUserIdToken } from "src/redux/utils/getUserIdToken";
+import { getUserIdToken } from "src/stores/user.store";
 import superjson from "superjson";
 import { API_URL } from "../config";
 import MainLayout from "../layout/MainLayout";

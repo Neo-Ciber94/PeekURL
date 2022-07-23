@@ -9,8 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { useValue } from "src/hooks/useValue";
-import { useAppDispatch } from "src/redux/store";
-import { userActions } from "src/redux/slices/user.slice";
+import { userStore } from "src/stores/user.store";
 
 export interface AuthContextProps {
   login: () => Promise<void>;
@@ -30,7 +29,6 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const dispatcher = useAppDispatch();
   const [user, setUser] = useState<User | null>(null);
   const auth = useValue(() => {
     const app = getFirebaseApp();
@@ -45,7 +43,7 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
       setIsLoading(false);
 
       if (user) {
-        dispatcher(userActions.initialize({ user }));
+        await userStore.save(user);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,7 +71,7 @@ export const AuthContextProvider: FC<React.PropsWithChildren> = ({
     try {
       await signOut(auth);
       setUser(null);
-      dispatcher(userActions.logout());
+      await userStore.save(null);
     } finally {
       setIsLoading(false);
     }
