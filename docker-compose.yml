@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password123
       POSTGRES_DB: sample
+    volumes:
+      - db_data:/var/lib/postgresql
 
   adminer:
     image: adminer
@@ -17,10 +19,16 @@ services:
       - 6001:8080
 
   redis:
-    image: redis/redis-stack
+    image: redis:7.0.4
     restart: always
     ports:
       - 6030:6379
-      - 6031:8001
     environment:
-      - REDIS_ARGS="--requirepass redispassword123"
+      - REDIS_PASSWORD="redispassword123"
+    volumes:
+      - redis_data:/data
+    command: "redis-server --appendonly yes --requirepass $${REDIS_PASSWORD}"
+
+volumes:
+  db_data:
+  redis_data:
