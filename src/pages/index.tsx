@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import URLShortener from "../components/URLShortener";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { BASE_URL } from "../config";
+import { Config } from "../config";
 import PageCard from "src/components/PageCard";
 import PageTitle from "src/components/PageHead";
 
@@ -18,7 +18,7 @@ export default function IndexPage() {
   const [copiedTooltipOpen, setCopiedTooltipOpen] = useState(false);
 
   const handleChangeURL = (s: string) => {
-    setShortURL(`${BASE_URL}/q${s}`);
+    setShortURL(`${Config.BASE_URL}/q${s}`);
   };
 
   const handleCopyUrl = async () => {

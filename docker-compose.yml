@@ -15,3 +15,12 @@ services:
     restart: always
     ports:
       - 6001:8080
+
+  redis:
+    image: redis/redis-stack
+    restart: always
+    ports:
+      - 6030:6379
+      - 6031:8001
+    environment:
+      - REDIS_ARGS="--requirepass redispassword123"

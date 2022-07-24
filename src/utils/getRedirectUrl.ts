@@ -1,5 +1,5 @@
-import { BASE_URL } from "src/config";
+import { Config } from "src/config";
 
-export function getDirectUrl(url: string): string {
-    return `${BASE_URL}/q${url}`;
+export function getRedirectUrl(url: string): string {
+    return `${Config.BASE_URL}/q${url}`;
 }

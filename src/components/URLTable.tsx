@@ -2,7 +2,7 @@ import { Badge, Box } from "@mui/material";
 import { DataTable, TableColumn } from "./DataTable/DataTable";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getTimePassed } from "@utils/getPassedTime";
-import { BASE_URL } from "src/config";
+import { Config } from "src/config";
 import { ShortUrlWithLogs } from "src/types/shorturl";
 
 const columns: TableColumn<ShortUrlWithLogs>[] = [
@@ -14,7 +14,7 @@ const columns: TableColumn<ShortUrlWithLogs>[] = [
         textOverflow="ellipsis"
         overflow={"hidden"}
         width={[200, 300, 200, 400]}
-      >{`${BASE_URL}q${e.shortUrl}`}</Box>
+      >{`${Config.BASE_URL}q${e.shortUrl}`}</Box>
     ),
   },
   {

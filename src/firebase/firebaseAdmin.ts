@@ -1,9 +1,11 @@
 import firebaseAdmin, { initializeApp, cert, getApps } from "firebase-admin/app";
+import { Config } from "src/config";
 import logger from "src/logging";
 let app: firebaseAdmin.App | undefined;
 
 if (app == null && getApps().length === 0) {
-    const secret = process.env.FIREBASE_SECRET;
+    const secret = Config.FIRE_BASE_SECRET;
+    
     if (secret == null) {
         throw new Error("Firebase secret is required");
     }

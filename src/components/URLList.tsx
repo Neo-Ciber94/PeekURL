@@ -1,6 +1,5 @@
 import {
   Badge,
-  Divider,
   IconButton,
   Link as MaterialLink,
   List,
@@ -12,7 +11,7 @@ import {
 import LinkIcon from "@mui/icons-material/Link";
 import DoneIcon from "@mui/icons-material/Done";
 import { AccessLog, ShortUrl } from "@prisma/client";
-import { BASE_URL } from "src/config";
+import { getRedirectUrl } from "@utils/getRedirectUrl";
 
 export interface URLListProps {
   urls: (ShortUrl & {
@@ -49,11 +48,11 @@ export default function URLList({ urls }: URLListProps) {
               <ListItemText
                 primary={
                   <MaterialLink
-                    href={getUrl(item.shortUrl)}
+                    href={getRedirectUrl(item.shortUrl)}
                     target="_blank"
                     rel="noopener"
                   >
-                    {getUrl(item.shortUrl)}
+                    {getRedirectUrl(item.shortUrl)}
                   </MaterialLink>
                 }
               />
@@ -63,8 +62,4 @@ export default function URLList({ urls }: URLListProps) {
       </List>
     </>
   );
-}
-
-function getUrl(url: string): string {
-  return `${BASE_URL}/q${url}`;
 }

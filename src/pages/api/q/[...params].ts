@@ -1,7 +1,7 @@
 import { NextApiHandler, NextApiRequest } from "next";
 import prismaInstance from "../../../database/prisma";
-import { lookup } from 'geoip-lite';
 import logger from "../../../logging";
+import { ipLookUpService } from "src/services/ip-look-up.service";
 
 const PATHNAME = "/api/q";
 
@@ -24,8 +24,6 @@ const handler: NextApiHandler = async (req, res) => {
         return res.status(404).end();
     }
 
-    logger.debug(req.headers);
-
     // Redirect
     res.redirect(shortenUrl.originalUrl);
 
@@ -33,7 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
 
     const ipAddress = getIp(req);
     const userAgent = getUserAgent(req);
-    const geo = ipAddress ? lookup(ipAddress) : null;
+    const geo = ipAddress ? await ipLookUpService.getIpGeolocation(ipAddress) : undefined;
 
     const access = await prisma.accessLog.create({
         data: {
@@ -41,10 +39,10 @@ const handler: NextApiHandler = async (req, res) => {
             ipAddress,
             userAgent,
             city: geo?.city,
-            country: geo?.country,
-            latitude: geo?.ll[0],
-            longitude: geo?.ll[1],
-            region: geo?.region
+            country: geo?.country_name,
+            latitude: geo?.latitude,
+            longitude: geo?.longitude,
+            region: geo?.region_name
         }
     });
 

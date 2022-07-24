@@ -9,7 +9,7 @@ import { ColorModeProvider } from "src/contexts/ColorModeContext";
 import { store } from "src/redux/store";
 import { getUserIdToken } from "src/stores/user.store";
 import superjson from "superjson";
-import { API_URL } from "../config";
+import { Config } from "../config";
 import MainLayout from "../layout/MainLayout";
 import { AppRouter } from "../server/routers/app.router";
 import "../styles/styles.css";
@@ -48,7 +48,7 @@ export default withTRPC<AppRouter>({
       };
     }
 
-    const url = `${API_URL}/trpc`;
+    const url = `${Config.API_URL}/trpc`;
 
     return {
       url,

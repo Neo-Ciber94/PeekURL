@@ -5,7 +5,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 import { ShortUrlWithLogs } from "src/types/shorturl";
-import { getDirectUrl } from "@utils/getRedirectUrl";
+import { getRedirectUrl } from "@utils/getRedirectUrl";
 import { Detail } from "./Detail";
 import { UrlAccessLogDetail } from "./UrlAccessLogDetail";
 import { AccessLog } from "@prisma/client";
@@ -21,11 +21,11 @@ export function ShortUrlDetails({ data }: ShortUrlProps) {
         {/* Short URL */}
         <Detail icon={<LinkIcon />} title="Short URL">
           <MaterialLink
-            href={getDirectUrl(data.shortUrl)}
+            href={getRedirectUrl(data.shortUrl)}
             target="_blank"
             rel="noopener"
           >
-            {getDirectUrl(data.shortUrl)}
+            {getRedirectUrl(data.shortUrl)}
           </MaterialLink>
         </Detail>
 
