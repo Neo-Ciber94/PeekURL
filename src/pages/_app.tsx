@@ -4,6 +4,7 @@ import { AppType } from "next/dist/shared/lib/utils";
 import { Provider } from "react-redux";
 import Authorized from "src/components/Authorized";
 import ClientOnly from "src/components/ClientOnly";
+import ErrorBoundary from "src/components/ErrorBoundary";
 import { AuthContextProvider } from "src/contexts/AuthContext";
 import { ColorModeProvider } from "src/contexts/ColorModeContext";
 import { store } from "src/redux/store";
@@ -17,18 +18,20 @@ import "../styles/styles.css";
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClientOnly>
-      <Provider store={store}>
-        <ColorModeProvider>
-          <AuthContextProvider>
-            <CssBaseline />
-            <MainLayout>
-              <Authorized>
-                <Component {...pageProps} />
-              </Authorized>
-            </MainLayout>
-          </AuthContextProvider>
-        </ColorModeProvider>
-      </Provider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <ColorModeProvider>
+            <AuthContextProvider>
+              <CssBaseline />
+              <MainLayout>
+                <Authorized>
+                  <Component {...pageProps} />
+                </Authorized>
+              </MainLayout>
+            </AuthContextProvider>
+          </ColorModeProvider>
+        </Provider>
+      </ErrorBoundary>
     </ClientOnly>
   );
 };

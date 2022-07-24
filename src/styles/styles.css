@@ -6,12 +6,12 @@ body {
   transition: background-color 500ms !important;
 }
 
-button.google-login-dark-button {
+button.social-login-dark-button {
   background-color: rgba(0, 0, 0, 0.2) !important;
   transition: background-color 500ms;
   color: white !important;
 }
 
-button.google-login-dark-button:hover {
+button.social-login-dark-button:hover {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }

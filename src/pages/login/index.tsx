@@ -34,7 +34,7 @@ export default function LoginPage() {
         px={[0, 0, 20, 30]}
       >
         <GoogleLoginButton
-          className={isDarkMode ? "google-login-dark-button" : undefined}
+          className={isDarkMode ? "social-login-dark-button" : undefined}
           onClick={handleLogin}
         />
       </Box>
