@@ -1,5 +1,5 @@
 import firebase, { initializeApp } from "firebase/app";
-import firebaseAnalytics from "firebase/analytics";
+import * as firebaseAnalytics from "firebase/analytics";
 import { Analytics } from "firebase/analytics";
 import logger from "src/logging";
 import { isBrowser } from "@utils/isBrowser";
