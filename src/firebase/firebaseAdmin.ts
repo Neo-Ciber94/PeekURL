@@ -1,28 +1,24 @@
 import firebaseAdmin, { initializeApp, cert, getApps } from "firebase-admin/app";
-import { Config } from "src/config";
+import { getSecretProvider } from "src/services/firebase-secret-provider";
 import logger from "src/logging";
+
 let app: firebaseAdmin.App | undefined;
 
-if (app == null && getApps().length === 0) {
-    const secret = Config.FIRE_BASE_SECRET;
-    
-    if (secret == null) {
-        throw new Error("Firebase secret is required");
+export function getFirebaseAdmin(): firebaseAdmin.App {
+    if (app == null && getApps().length === 0) {
+        const provider = getSecretProvider();
+        const secret = provider.getSecret();
+
+        app = initializeApp({
+            credential: cert({
+                projectId: secret.project_id,
+                clientEmail: secret.client_email,
+                privateKey: secret.private_key,
+            }),
+        });
+
+        logger.info("Initialized server side firebase")
     }
 
-    const serviceAccount = JSON.parse(secret);
-
-    app = initializeApp({
-        credential: cert({
-            projectId: serviceAccount.project_id,
-            clientEmail: serviceAccount.client_email,
-            privateKey: serviceAccount.private_key,
-        }),
-    });
-
-    logger.info("Initialized server side firebase")
-}
-
-export function getFirebaseAdmin() {
-    return app;
+    return app!;
 }

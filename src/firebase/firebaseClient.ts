@@ -17,16 +17,16 @@ const firebaseConfig = {
 let app: firebase.FirebaseApp | undefined;
 let analytics: Analytics | undefined;
 
-if (app == null && analytics == null) {
-    app = initializeApp(firebaseConfig);
+export function getFirebaseApp(): firebase.FirebaseApp {
+    if (app == null) {
+        app = initializeApp(firebaseConfig);
 
-    if (!isBrowser()) {
-        logger.info("Initialized client side firebase");
+        if (!isBrowser()) {
+            logger.info("Initialized client side firebase");
+        }
     }
-}
 
-export function getFirebaseApp() {
-    return app;
+    return app!;
 }
 
 export async function getFirebaseAnalytics(): Promise<Analytics | null> {
