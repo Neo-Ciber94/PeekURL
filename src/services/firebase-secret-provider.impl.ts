@@ -39,6 +39,9 @@ async function getSecret(): Promise<FirebaseSecret> {
   let data = await tryGetSecretFromStorage();
 
   if (data == null) {
+    logger.warn(
+      `Could not find secret in path ${SECRET_PATH}. Will fetch from remote server`
+    );
     const json = await fetchSecretFromRemoteServer();
     data = json.data;
 
@@ -54,6 +57,7 @@ async function getSecret(): Promise<FirebaseSecret> {
 async function tryGetSecretFromStorage(): Promise<string | null> {
   if (await fse.pathExists(SECRET_PATH)) {
     const data = await fs.readFile(SECRET_PATH, "utf8");
+    logger.info("Loaded firebase secret from file system");
     return data;
   }
 
@@ -72,22 +76,38 @@ async function fetchSecretFromRemoteServer(): Promise<SecretDataJsonResponse> {
     throw new Error("Secret provider token is required");
   }
 
-  const res = await fetch(apiUrl, {
+  const url = `${apiUrl}/data`;
+  const res = await fetch(url, {
     headers: {
-      Authentication: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
 
+  if (!res.ok) {
+    const error = {
+      status: res.status,
+      statusText: res.statusText,
+      message: await res.text(),
+    };
+
+    throw new Error(JSON.stringify(error, null, 2));
+  }
+
   const json: SecretDataJsonResponse = await res.json();
+  logger.info("Loaded firebase secret from remote server");
   return json;
 }
 
 function decryptSecret(data: string): string {
   const algorithm = "aes-128-cbc";
+  const encryptionKeyHex = process.env.SECRET_PROVIDER_ENCRYPTION_KEY as string;
+  const encryptionIvHex = process.env.SECRET_PROVIDER_ENCRYPTION_IV as string;
+
   const decipher = crypto.createDecipheriv(
     algorithm,
-    process.env.SECRET_PROVIDER_ENCRYPTION_KEY as string,
-    process.env.SECRET_PROVIDER_ENCRYPTION_IV as string
+    Buffer.from(encryptionKeyHex, "hex"),
+    Buffer.from(encryptionIvHex, "hex")
   );
 
   let decrypted = decipher.update(data, "hex", "utf8");
