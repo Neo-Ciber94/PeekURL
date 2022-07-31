@@ -48,6 +48,7 @@
     "react-spring": "^9.5.2",
     "redis": "^4.2.0",
     "superjson": "^1.9.1",
+    "vercel": "^27.3.3",
     "winston": "^3.8.1",
     "zod": "^3.17.3"
   },
