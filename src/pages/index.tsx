@@ -12,13 +12,14 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Config } from "../config";
 import PageCard from "src/components/PageCard";
 import PageTitle from "src/components/PageHead";
+import { getRedirectUrl } from "@utils/getRedirectUrl";
 
 export default function IndexPage() {
   const [shortURL, setShortURL] = useState<string | null>(null);
   const [copiedTooltipOpen, setCopiedTooltipOpen] = useState(false);
 
   const handleChangeURL = (s: string) => {
-    setShortURL(`${Config.BASE_URL}/q${s}`);
+    setShortURL(getRedirectUrl(s));
   };
 
   const handleCopyUrl = async () => {

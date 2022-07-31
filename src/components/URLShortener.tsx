@@ -1,5 +1,14 @@
-import { Grid, TextField } from "@mui/material";
+import {
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+  TextField,
+  FormHelperText,
+} from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
+import ClearIcon from "@mui/icons-material/Clear";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { trpc } from "../utils/trpc";
@@ -23,6 +32,7 @@ export default function URLShortener({
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm<GenerateUrl>();
 
@@ -45,6 +55,11 @@ export default function URLShortener({
     setUrl(text);
   };
 
+  const handleClearUrl = () => {
+    setUrl("");
+    clearErrors();
+  };
+
   const handleShortenUrl = async (generate: GenerateUrl) => {
     try {
       const result = await shortUrlMutation.mutateAsync({
@@ -52,6 +67,7 @@ export default function URLShortener({
       });
 
       onChange(result.shortUrl);
+      setUrl("");
     } catch (err) {
       console.error(err);
     }
@@ -61,17 +77,30 @@ export default function URLShortener({
     <form onSubmit={handleSubmit(handleShortenUrl)} style={{ width: "100%" }}>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={9}>
-          <TextField
-            {...register("url")}
-            value={url}
-            error={!!errors.url}
-            helperText={errors.url?.message}
-            size="small"
-            placeholder="URL to shorten"
-            autoComplete="off"
-            onChange={handleUrlChange}
-            sx={{ width: "100%" }}
-          />
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <OutlinedInput
+              {...register("url")}
+              value={url}
+              size="small"
+              placeholder="URL to shorten"
+              autoComplete="off"
+              onChange={handleUrlChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClearUrl}
+                    onMouseDown={handleClearUrl}
+                    edge="end"
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            <FormHelperText error={!!errors.url}>
+              {errors.url?.message}
+            </FormHelperText>
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={3}>
           <LoadingButton
