@@ -27,15 +27,16 @@ model ShortUrl {
 }
 
 model AccessLog {
-  id           String   @id @default(uuid()) @db.Uuid
-  shortUrlId   String   @db.Uuid
-  shortUrl     ShortUrl @relation(fields: [shortUrlId], references: [id])
-  ipAddress    String?
-  userAgent    String?
-  country      String?
-  city         String?
-  region       String?
-  latitude     Float?
-  longitude    Float?
-  creationDate DateTime @default(now())
+  id             String   @id @default(uuid()) @db.Uuid
+  shortUrlId     String   @db.Uuid
+  shortUrl       ShortUrl @relation(fields: [shortUrlId], references: [id])
+  ipAddress      String?
+  userAgent      String?
+  country        String?
+  city           String?
+  region         String?
+  latitude       Float?
+  longitude      Float?
+  mustRevalidate Boolean  @default(true)
+  creationDate   DateTime @default(now())
 }
