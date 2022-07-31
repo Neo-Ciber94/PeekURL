@@ -9,7 +9,7 @@ import logger from "src/logging";
 export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> = async ({ ctx, next }) => {
     const { prisma } = ctx;
 
-    const app = getFirebaseAdmin();
+    const app = await getFirebaseAdmin();
     const auth = getAuth(app);
 
     const idToken = ctx.req.headers.authorization; // Get token from request

@@ -4,10 +4,10 @@ import logger from "src/logging";
 
 let app: firebaseAdmin.App | undefined;
 
-export function getFirebaseAdmin(): firebaseAdmin.App {
+export async function getFirebaseAdmin(): Promise<firebaseAdmin.App> {
     if (app == null && getApps().length === 0) {
         const provider = getSecretProvider();
-        const secret = provider.getSecret();
+        const secret = await provider.getSecret();
 
         app = initializeApp({
             credential: cert({
