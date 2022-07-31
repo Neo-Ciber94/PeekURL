@@ -2,6 +2,8 @@
 
 An url shortener.
 
+_Check it out on: <https://peek-url.vercel.app>_
+
 ## How to run?
 
 TODO!
