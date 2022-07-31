@@ -1,11 +1,11 @@
 import { trpc } from "@utils/trpc";
 import PageCard from "src/components/PageCard";
 import Loading from "src/components/Loading";
-import { Typography } from "@mui/material";
 import URLTable from "src/components/URLTable";
 import { ShortUrl } from "@prisma/client";
 import { useRouter } from "next/router";
-import PageTitle from "src/components/PageHead";
+import AppHead from "src/components/AppHead";
+import { PageTitle } from "src/components/PageTitle";
 
 export default function UrlListPage() {
   const router = useRouter();
@@ -21,11 +21,9 @@ export default function UrlListPage() {
 
   return (
     <>
-      <PageTitle name="My URLs" />
+      <AppHead name="My URLs" />
+      <PageTitle startText="My " endText="URLS" />
       <PageCard p={4}>
-        <Typography variant="h5" mb={1}>
-          My URLS
-        </Typography>
         {isLoading && <Loading />}
         {!isLoading && data && (
           <URLTable urls={data} onClick={handleUrlClick} />

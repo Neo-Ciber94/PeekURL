@@ -10,7 +10,7 @@ import { useState } from "react";
 import URLShortener from "../components/URLShortener";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import PageCard from "src/components/PageCard";
-import PageTitle from "src/components/PageHead";
+import AppHead from "src/components/AppHead";
 import { getRedirectUrl } from "@utils/getRedirectUrl";
 
 export default function IndexPage() {
@@ -34,7 +34,7 @@ export default function IndexPage() {
 
   return (
     <>
-      <PageTitle name="Shorten URL" />
+      <AppHead name="Shorten URL" />
       <PageCard height={300} px={[3, 5, 5]}>
         <Typography variant="h5" mb={1}>
           Shorten an URL

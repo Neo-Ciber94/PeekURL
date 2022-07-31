@@ -13,7 +13,7 @@ export default function PageCard({
       display="flex"
       flexDirection="column"
       justifyContent={"center"}
-      my={5}
+      my={3}
       mx={[0, 0, 10]}
     >
       {children}

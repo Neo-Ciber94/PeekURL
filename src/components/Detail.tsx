@@ -1,5 +1,5 @@
 import { Typography, Grid, Box, useMediaQuery, useTheme } from "@mui/material";
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useIsDarkMode } from "src/contexts/ColorModeContext";
 
 export interface DetailProps extends React.PropsWithChildren {

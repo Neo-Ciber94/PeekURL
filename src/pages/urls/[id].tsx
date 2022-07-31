@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import { trpc } from "@utils/trpc";
 import PageCard from "src/components/PageCard";
 import Loading from "src/components/Loading";
@@ -7,7 +6,8 @@ import {
   ShortUrlDetails,
   ShortUrlLogDetails,
 } from "src/components/ShortUrlDetails";
-import PageTitle from "src/components/PageHead";
+import AppHead from "src/components/AppHead";
+import { PageTitle } from "src/components/PageTitle";
 
 export default function UrlPage() {
   const { query } = useRouter();
@@ -22,11 +22,9 @@ export default function UrlPage() {
 
   return (
     <>
-      <PageTitle name="View URL" />
+      <AppHead name="View URL" />
+      <PageTitle startText={"URL :: "} endText={id} />
       <PageCard p={4}>
-        <Typography variant="h5" mb={1}>
-          URL :: {`${id}`}
-        </Typography>
         {(!data || isLoading) && <Loading />}
         {data && <ShortUrlDetails data={data} />}
       </PageCard>

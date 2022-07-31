@@ -5,8 +5,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  useTheme,
 } from "@mui/material";
 import React from "react";
+import { useIsDarkMode } from "src/contexts/ColorModeContext";
 
 export interface TableColumn<T> {
   header: string;
@@ -58,6 +60,9 @@ type DatTableItemProps<T> = Readonly<
 >;
 
 function DataTableItems<T>({ columns, data, onClick }: DatTableItemProps<T>) {
+  const isDarkMode = useIsDarkMode();
+  const theme = useTheme();
+
   const handleElementClick = (item: T, colIndex: number) => {
     if (onClick) {
       onClick(item, colIndex);
@@ -72,7 +77,9 @@ function DataTableItems<T>({ columns, data, onClick }: DatTableItemProps<T>) {
           sx={{
             cursor: "pointer",
             "&:hover": {
-              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              backgroundColor: isDarkMode
+                ? "rgba(255, 255, 255, 0.03)"
+                : "rgba(0, 0, 0, 0.08)",
             },
           }}
         >

@@ -2,8 +2,8 @@ import { Badge, Box } from "@mui/material";
 import { DataTable, TableColumn } from "./DataTable/DataTable";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getTimePassed } from "@utils/getPassedTime";
-import { Config } from "src/config";
 import { ShortUrlWithLogs } from "src/types/shorturl";
+import { getRedirectUrl } from "@utils/getRedirectUrl";
 
 const columns: TableColumn<ShortUrlWithLogs>[] = [
   {
@@ -14,7 +14,9 @@ const columns: TableColumn<ShortUrlWithLogs>[] = [
         textOverflow="ellipsis"
         overflow={"hidden"}
         width={[200, 300, 200, 400]}
-      >{`${Config.BASE_URL}q${e.shortUrl}`}</Box>
+      >
+        {getRedirectUrl(e.shortUrl)}
+      </Box>
     ),
   },
   {

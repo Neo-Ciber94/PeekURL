@@ -2,11 +2,11 @@ import Head from "next/head";
 
 const PAGE_NAME = "PeekURL";
 
-export interface PageTitleProps {
+export interface AppHeadProps {
   name?: string;
 }
 
-export default function PageTitle({ name }: PageTitleProps) {
+export default function AppHead({ name }: AppHeadProps) {
   const title = name ? `${PAGE_NAME} :: ${name}` : PAGE_NAME;
 
   return (

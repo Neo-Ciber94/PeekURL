@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { GoogleLoginButton } from "react-social-login-buttons";
-import PageTitle from "src/components/PageHead";
+import AppHead from "src/components/AppHead";
 import { useAuth } from "src/contexts/AuthContext";
 import { useIsDarkMode } from "src/contexts/ColorModeContext";
 
@@ -23,7 +23,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <PageTitle name="Login" />
+      <AppHead name="Login" />
       <Box
         height="50%"
         width="100%"

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ClearIcon from "@mui/icons-material/Clear";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { trpc } from "../utils/trpc";
 
@@ -35,6 +35,8 @@ export default function URLShortener({
     clearErrors,
     formState: { errors },
   } = useForm<GenerateUrl>();
+
+  const hasUrl = useMemo(() => url.trim().length > 0, [url]);
 
   useEffect(() => {
     if (error == null) {
@@ -86,15 +88,17 @@ export default function URLShortener({
               autoComplete="off"
               onChange={handleUrlChange}
               endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={handleClearUrl}
-                    onMouseDown={handleClearUrl}
-                    edge="end"
-                  >
-                    <ClearIcon />
-                  </IconButton>
-                </InputAdornment>
+                hasUrl && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClearUrl}
+                      onMouseDown={handleClearUrl}
+                      edge="end"
+                    >
+                      <ClearIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
               }
             />
             <FormHelperText error={!!errors.url}>
