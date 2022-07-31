@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Divider,
-  IconButton,
   Menu,
   MenuItem,
   styled,
@@ -13,10 +12,9 @@ import Logo from "../components/Logo";
 import Link from "next/link";
 import { useAuth } from "src/contexts/AuthContext";
 import { useState } from "react";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { useColorMode, useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useIsDarkMode } from "src/contexts/ColorModeContext";
 import { useRouter } from "next/router";
+import { ThemeToggle } from "src/components/ThemeToggle";
 
 const StyledButton = styled(Button)({
   "&": {
@@ -36,7 +34,6 @@ const StyledButton = styled(Button)({
 export default function Header() {
   const { logout, user } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { toggleColorMode } = useColorMode();
   const { pathname } = useRouter();
   const isDarkMode = useIsDarkMode();
   const open = Boolean(anchorEl);
@@ -80,14 +77,7 @@ export default function Header() {
           }}
         >
           <Box>
-            <IconButton
-              onClick={toggleColorMode}
-              sx={{
-                color: "palette.text.primary",
-              }}
-            >
-              {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
+            <ThemeToggle />
           </Box>
 
           {!user && pathname !== "/login" && (
