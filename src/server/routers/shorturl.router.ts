@@ -36,7 +36,7 @@ export const urlRouter = createProtectedRouter()
                 throw new TRPCError({
                     code: 'BAD_REQUEST',
                     message: "Invalid url"
-                })
+                });
             }
         }
     })
@@ -65,7 +65,7 @@ export const urlRouter = createProtectedRouter()
                 }
             });
 
-            return shortenUrls as ShortUrlWithLogs[]
+            return shortenUrls as ShortUrlWithLogs[];
         }
     })
     .query('.get_by_id', {
@@ -100,7 +100,7 @@ export const urlRouter = createProtectedRouter()
                 throw new TRPCError({
                     code: 'NOT_FOUND',
                     message: 'Cannot find the url'
-                })
+                });
             }
 
             return shortenUrl as ShortUrlWithLogs;
@@ -138,9 +138,9 @@ export const urlRouter = createProtectedRouter()
                 throw new TRPCError({
                     code: 'NOT_FOUND',
                     message: 'Cannot find the url'
-                })
+                });
             }
 
             return shortenUrl as ShortUrlWithLogs;
         }
-    })
+    });

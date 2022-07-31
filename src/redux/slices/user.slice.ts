@@ -7,7 +7,7 @@ interface UserState {
 
 const initialState: UserState = {
     user: null
-}
+};
 
 const userSlice = createSlice({
     name: 'user',
@@ -20,7 +20,7 @@ const userSlice = createSlice({
             state.user = null;
         }
     }
-})
+});
 
 export const userActions = userSlice.actions;
 

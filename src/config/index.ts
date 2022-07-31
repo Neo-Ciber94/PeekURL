@@ -4,7 +4,7 @@ export namespace Config {
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000";
 
-    export const API_URL = `${BASE_URL}/api`
+    export const API_URL = `${BASE_URL}/api`;
 
     export const IP_STACK_API_KEY = process.env.IP_STACK_API_KEY;
 

@@ -18,7 +18,7 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
     if (idToken) {
         try {
             const { uid } = await auth.verifyIdToken(idToken, true);
-            user = await prisma.user.findFirst({ where: { uid } })
+            user = await prisma.user.findFirst({ where: { uid } });
 
             // Use do not exists in the database
             if (user == null) {
@@ -27,7 +27,7 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
 
                 user = await prisma.user.create({
                     data: { uid, username }
-                })
+                });
             }
 
         } catch (err) {
@@ -38,7 +38,7 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
     if (user == null) {
         throw new TRPCError({
             code: 'UNAUTHORIZED'
-        })
+        });
     }
 
     return next({
@@ -47,4 +47,4 @@ export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> 
             currentUserId: user.id
         }
     });
-}
+};

@@ -66,11 +66,11 @@ class IpLookUpRedisService extends RedisService<IpGeolocationInfo> {
     constructor() {
         super({
             baseKey: 'ipstack-ip-geolocation-info'
-        })
+        });
     }
 }
 
-const IP_STACK_URL = "http://api.ipstack.com"
+const IP_STACK_URL = "http://api.ipstack.com";
 const ipLookUpRedisService = new IpLookUpRedisService();
 
 export class IpLookUpService {

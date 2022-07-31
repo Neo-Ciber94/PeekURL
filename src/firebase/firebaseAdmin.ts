@@ -17,7 +17,7 @@ export async function getFirebaseAdmin(): Promise<firebaseAdmin.App> {
             }),
         });
 
-        logger.info("Initialized server side firebase")
+        logger.info("Initialized server side firebase");
     }
 
     return app!;

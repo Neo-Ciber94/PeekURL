@@ -11,7 +11,7 @@ export async function checkURLIsAvailable(url: string): Promise<boolean> {
     try {
         const res = await fetch(url, {
             method: 'HEAD',
-        })
+        });
 
         return res.status < 400 || res.status > 500;
     }

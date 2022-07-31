@@ -44,7 +44,7 @@ export class RedisService<T> {
     async *getAllAsIterator(): AsyncIterable<T> {
         const scanIterator = redisInstance.scanIterator({
             MATCH: `${this.baseKey}/*`
-        })
+        });
 
         for await (const key of scanIterator) {
             const json = await redisInstance.get(key);
@@ -136,5 +136,5 @@ function defaultTransformer(): Transformer {
     return {
         parse: superjson.parse,
         stringify: superjson.stringify,
-    }
+    };
 }

@@ -28,10 +28,10 @@ export function usePrefersDarkMode() {
         } else {
             localStorage.setItem(COLOR_SCHEMA_MODE, "light");
         }
-    }
+    };
 
     return {
         setPrefersDarkMode: handleSetPrefersDarkMode,
         prefersDarkMode,
-    }
+    };
 }

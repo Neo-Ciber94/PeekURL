@@ -14,5 +14,5 @@ export function createRouter() {
  */
 export function createProtectedRouter() {
     return trpc.router<Context>()
-        .middleware(authMiddleware)
+        .middleware(authMiddleware);
 }

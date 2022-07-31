@@ -9,18 +9,18 @@ import { PrismaClient } from "@prisma/client";
 declare global {
     // allow global `var` declarations
     // eslint-disable-next-line no-var
-    var prisma: PrismaClient | undefined
+    var prisma: PrismaClient | undefined;
 }
 
-let prismaInstance: PrismaClient
+let prismaInstance: PrismaClient;
 
 if (process.env.NODE_ENV === 'production') {
-    prismaInstance = new PrismaClient()
+    prismaInstance = new PrismaClient();
 } else {
     if (!global.prisma) {
-        global.prisma = new PrismaClient()
+        global.prisma = new PrismaClient();
     }
-    prismaInstance = global.prisma
+    prismaInstance = global.prisma;
 }
 
-export default prismaInstance
+export default prismaInstance;

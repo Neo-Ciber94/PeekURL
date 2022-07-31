@@ -18,7 +18,7 @@ const handler: NextApiHandler = async (req, res) => {
             active: true,
             shortUrl
         }
-    })
+    });
 
     if (shortenUrl == null) {
         return res.status(404).end();
@@ -47,10 +47,10 @@ const handler: NextApiHandler = async (req, res) => {
     });
 
     logger.debug(`[${req.method}] access to ${shortenUrl.shortUrl} - ${access.ipAddress}`);
-}
+};
 
 function getIp(req: NextApiRequest): string | undefined {
-    let forwarded = req.headers["x-forwarded-for"]
+    let forwarded = req.headers["x-forwarded-for"];
 
     if (Array.isArray(forwarded)) {
         forwarded = forwarded[0];

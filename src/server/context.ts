@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import prismaInstance from '../database/prisma'
+import prismaInstance from '../database/prisma';
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -28,5 +28,5 @@ export async function createContext(
         req,
         res,
         prisma: prismaInstance
-    }
+    };
 }

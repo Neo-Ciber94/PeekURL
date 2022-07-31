@@ -1,6 +1,6 @@
 
 export default function LoremIpsum() {
-    return <p>{LOREM}</p>
+    return <p>{LOREM}</p>;
 }
 
 const LOREM = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices, massa id sollicitudin rutrum, neque tortor maximus libero, sed ultrices enim massa ac enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris efficitur diam risus, eget facilisis diam cursus non. Proin vulputate mi at sapien malesuada, ac hendrerit mauris dignissim. Morbi at urna nulla. Aenean id sollicitudin eros. Nunc mi dolor, ultrices eget ultrices sed, consectetur sit amet felis. Quisque a finibus est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris eu ex condimentum, vestibulum lorem eu, congue dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus a arcu vel ipsum bibendum eleifend. Donec cursus mi sit amet vestibulum lobortis. Duis ipsum orci, congue at nulla id, varius aliquam sem. Pellentesque gravida tincidunt odio sed rutrum. Nulla facilisis tempor quam ac ullamcorper.

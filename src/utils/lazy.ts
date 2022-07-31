@@ -21,7 +21,7 @@ export class Lazy<T> {
         this.#state = {
             type: 'uninit',
             factory
-        }
+        };
     }
 
     /**

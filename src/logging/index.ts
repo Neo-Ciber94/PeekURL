@@ -2,9 +2,9 @@ import * as winston from 'winston';
 
 const customFormat = winston.format((info) => {
     const date = new Date().toISOString();
-    info.message = `[${date}] ${info.message}`
+    info.message = `[${date}] ${info.message}`;
     return info;
-})
+});
 
 const logger = winston.createLogger({
     level: 'debug',
@@ -16,6 +16,6 @@ const logger = winston.createLogger({
     transports: [
         new winston.transports.Console()
     ]
-})
+});
 
 export default logger;
