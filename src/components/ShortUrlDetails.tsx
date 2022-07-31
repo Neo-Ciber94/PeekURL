@@ -51,8 +51,6 @@ export function ShortUrlDetails({ data }: ShortUrlProps) {
           <Typography>{data.active ? "Yes" : "No"}</Typography>
         </Detail>
       </Grid>
-
-
     </>
   );
 }

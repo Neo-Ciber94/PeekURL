@@ -1,4 +1,5 @@
 import { Typography, Grid, Box } from "@mui/material";
+import React from "react";
 
 export interface DetailProps extends React.PropsWithChildren {
   icon: React.ReactNode;

@@ -1,4 +1,4 @@
-import { Typography, Grid, Divider } from "@mui/material";
+import { Typography, Grid, Divider, Box } from "@mui/material";
 import { AccessLog } from "@prisma/client";
 import { getTimePassed } from "@utils/getPassedTime";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -10,6 +10,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
 import { Detail } from "./Detail";
+import { ToggleHidden } from "./ToggleHidden";
 
 export interface UrlAccessLogDetailProps {
   log: AccessLog;
@@ -18,45 +19,77 @@ export interface UrlAccessLogDetailProps {
 export function UrlAccessLogDetail({ log }: UrlAccessLogDetailProps) {
   return (
     <>
-      <Detail icon={<DnsIcon />} title="IP">
-        <Typography>{log.ipAddress || "N/A"}</Typography>
-      </Detail>
-
       <Detail icon={<AccessTimeIcon />} title="Since">
-        <Typography>{getTimePassed(log.creationDate).toString()}</Typography>
+        <Wrap>
+          <Typography>{getTimePassed(log.creationDate).toString()}</Typography>
+        </Wrap>
       </Detail>
 
       <Detail icon={<DateRangeIcon />} title="Date & time">
-        <Typography>{log.creationDate.toString()}</Typography>
+        <Wrap>
+          <Typography>{log.creationDate.toString()}</Typography>
+        </Wrap>
+      </Detail>
+
+      <Detail icon={<DnsIcon />} title="IP">
+        <ToggleHidden>
+          <Typography>{log.ipAddress || "N/A"}</Typography>
+        </ToggleHidden>
       </Detail>
 
       <Detail icon={<PublicIcon />} title="Country">
-        <Typography>{log.country || "N/A"}</Typography>
+        <ToggleHidden>
+          <Typography>{log.country || "N/A"}</Typography>
+        </ToggleHidden>
       </Detail>
 
       <Detail icon={<LocationCityIcon />} title="City">
-        <Typography>{log.city || "N/A"}</Typography>
+        <ToggleHidden>
+          <Typography>{log.city || "N/A"}</Typography>
+        </ToggleHidden>
       </Detail>
 
       <Detail icon={<SouthAmericaIcon />} title="Region">
-        <Typography>{log.region || "N/A"}</Typography>
+        <ToggleHidden>
+          <Typography>{log.region || "N/A"}</Typography>
+        </ToggleHidden>
       </Detail>
 
       <Detail icon={<LanguageIcon />} title="Latitude">
-        <Typography>{log.latitude || "N/A"}</Typography>
+        <ToggleHidden>
+          <Typography>{log.latitude || "N/A"}</Typography>
+        </ToggleHidden>
       </Detail>
 
       <Detail icon={<LanguageIcon />} title="Longitude">
-        <Typography>{log.longitude || "N/A"}</Typography>
+        <ToggleHidden>
+          <Typography>{log.longitude || "N/A"}</Typography>
+        </ToggleHidden>
       </Detail>
 
       <Detail icon={<MobileScreenShareIcon />} title="User Agent">
-        <Typography>{log.userAgent || "N/A"}</Typography>
+        <ToggleHidden>
+          <Typography>{log.userAgent || "N/A"}</Typography>
+        </ToggleHidden>
       </Detail>
 
       <Grid item xs={12} marginY={1}>
         <Divider />
       </Grid>
     </>
+  );
+}
+
+function Wrap({ children }: React.PropsWithChildren) {
+  return (
+    <Box
+      width={"100%"}
+      display="flex"
+      flexDirection={"row"}
+      py={"8px"}
+      alignItems="center"
+    >
+      {children}
+    </Box>
   );
 }

@@ -25,7 +25,7 @@ export default function UrlPage() {
       <PageTitle name="View URL" />
       <PageCard p={4}>
         <Typography variant="h5" mb={1}>
-          URL - {`${id}`}
+          URL :: {`${id}`}
         </Typography>
         {(!data || isLoading) && <Loading />}
         {data && <ShortUrlDetails data={data} />}
