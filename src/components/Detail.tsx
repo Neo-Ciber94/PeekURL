@@ -1,5 +1,6 @@
-import { Typography, Grid, Box } from "@mui/material";
-import React from "react";
+import { Typography, Grid, Box, useMediaQuery, useTheme } from "@mui/material";
+import React, { useCallback, useMemo } from "react";
+import { useIsDarkMode } from "src/contexts/ColorModeContext";
 
 export interface DetailProps extends React.PropsWithChildren {
   icon: React.ReactNode;
@@ -7,25 +8,38 @@ export interface DetailProps extends React.PropsWithChildren {
 }
 
 export function Detail({ icon, title, children }: DetailProps) {
+  const matches = useMediaQuery("(min-width:150px)");
+  const isDarkMode = useIsDarkMode();
+  const theme = useTheme();
+
+  const titleColor = useMemo(() => {
+    if (isDarkMode) {
+      return theme.palette.secondary.main;
+    }
+
+    return theme.palette.primary.main;
+  }, [theme, isDarkMode]);
+
   return (
     <>
-      <Grid item xs={12} md={3}>
-        <Box display="flex" flexDirection="row" alignContent="center" gap={2}>
+      <Grid item xs={matches ? 4 : 12}>
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignContent="center"
+          gap={2}
+          color={titleColor}
+          sx={{
+            cursor: "pointer",
+          }}
+        >
           {icon}
           <Typography component="span" fontWeight="bold">
             {title}
           </Typography>
         </Box>
       </Grid>
-      <Grid
-        item
-        xs={12}
-        md={9}
-        whiteSpace={"nowrap"}
-        overflow="hidden"
-        textOverflow="ellipsis"
-        width={[100, 300, 400]}
-      >
+      <Grid item xs={matches ? 8 : 12} width={[100, 300, 400]}>
         {children}
       </Grid>
     </>

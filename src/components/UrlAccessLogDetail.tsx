@@ -27,7 +27,7 @@ export function UrlAccessLogDetail({ log }: UrlAccessLogDetailProps) {
 
       <Detail icon={<DateRangeIcon />} title="Date & time">
         <Wrap>
-          <Typography>{log.creationDate.toString()}</Typography>
+          <Typography>{log.creationDate.toLocaleString()}</Typography>
         </Wrap>
       </Detail>
 

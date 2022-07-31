@@ -1,15 +1,10 @@
 import crypto from "crypto";
 import logger from "src/logging";
-import fs from "fs/promises";
-import * as fse from "fs-extra";
-import path from "path";
 import {
   FirebaseSecret,
   IFirebaseSecretProvider,
 } from "./firebase-secret-provider";
 import { Lazy } from "@utils/lazy";
-
-const SECRET_PATH = path.join(__dirname, "secret.data");
 
 interface SecretDataJsonResponse {
   data: string;
@@ -36,32 +31,10 @@ export class FirebaseSecretProvider implements IFirebaseSecretProvider {
 }
 
 async function getSecret(): Promise<FirebaseSecret> {
-  let data = await tryGetSecretFromStorage();
-
-  if (data == null) {
-    logger.warn(
-      `Could not find secret in path ${SECRET_PATH}. Will fetch from remote server`
-    );
-    const json = await fetchSecretFromRemoteServer();
-    data = json.data;
-
-    // Save the secret locally
-    await fs.writeFile(SECRET_PATH, data);
-  }
-
-  const decrypted = decryptSecret(data);
+  const json = await fetchSecretFromRemoteServer();
+  const decrypted = decryptSecret(json.data);
   const secret = JSON.parse(decrypted) as FirebaseSecret;
   return secret;
-}
-
-async function tryGetSecretFromStorage(): Promise<string | null> {
-  if (await fse.pathExists(SECRET_PATH)) {
-    const data = await fs.readFile(SECRET_PATH, "utf8");
-    logger.info("Loaded firebase secret from file system");
-    return data;
-  }
-
-  return null;
 }
 
 async function fetchSecretFromRemoteServer(): Promise<SecretDataJsonResponse> {
@@ -81,6 +54,7 @@ async function fetchSecretFromRemoteServer(): Promise<SecretDataJsonResponse> {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+      mode: "cors",
     },
   });
 

@@ -33,6 +33,9 @@ export function ToggleHidden({
       display="flex"
       flexDirection={"row"}
       alignItems="center"
+      sx={{
+        cursor: visible ? "inherit" : "pointer",
+      }}
     >
       {getChildren()}
       <IconButton
