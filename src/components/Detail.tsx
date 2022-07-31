@@ -21,8 +21,28 @@ export function Detail({ icon, title, children }: DetailProps) {
   }, [theme, isDarkMode]);
 
   return (
-    <>
-      <Grid item xs={matches ? 4 : 12}>
+    <Grid
+      container
+      item
+      xs={12}
+      className="detail-card"
+      sx={{
+        pt: "0 !important",
+        "&:hover": {
+          backgroundColor: isDarkMode
+            ? "rgba(255, 255, 255, 0.03)"
+            : "rgba(0, 0, 0, 0.08)",
+          borderRadius: 10,
+        },
+      }}
+    >
+      <Grid
+        item
+        xs={matches ? 4 : 12}
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+      >
         <Box
           display="flex"
           flexDirection="row"
@@ -42,6 +62,6 @@ export function Detail({ icon, title, children }: DetailProps) {
       <Grid item xs={matches ? 8 : 12} width={[100, 300, 400]}>
         {children}
       </Grid>
-    </>
+    </Grid>
   );
 }

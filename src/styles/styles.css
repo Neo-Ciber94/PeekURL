@@ -1,17 +1,2 @@
-header {
-  transition: background-color 500ms !important;
-}
-
-body {
-  transition: background-color 500ms !important;
-}
-
-button.social-login-dark-button {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  transition: background-color 500ms;
-  color: white !important;
-}
-
-button.social-login-dark-button:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
+@import url("./Detail.css");
+@import url("./main.css");

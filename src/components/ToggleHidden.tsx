@@ -39,6 +39,7 @@ export function ToggleHidden({
     >
       {getChildren()}
       <IconButton
+        className="toggle-icon"
         sx={{
           marginLeft: "auto",
           opacity: 0.1,
