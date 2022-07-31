@@ -8,7 +8,7 @@ export default function PageCard({
   return (
     <Box
       {...rest}
-      boxShadow={"rgba(149, 157, 165, 0.4) 0px 8px 24px"}
+      boxShadow={"rgba(149, 157, 165, 0.1) 0px 8px 24px"}
       borderRadius={"20px"}
       display="flex"
       flexDirection="column"
