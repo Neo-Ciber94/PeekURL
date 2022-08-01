@@ -50,7 +50,7 @@ const handler: NextApiHandler = async (req, res) => {
   });
 
   logger.debug(
-    `[${req.method}] access to ${shortenUrl.shortUrl} - ${access.ipAddress}`
+    `[${req.method}] request to ${shortenUrl.shortUrl} from ${access.ipAddress}`
   );
 };
 

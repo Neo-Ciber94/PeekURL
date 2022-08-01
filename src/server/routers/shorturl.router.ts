@@ -180,8 +180,6 @@ async function revalidateAccessLogs(
   }
 
   if (anyRevalidated) {
-    db.accessLog.updateMany({
-      data: logs,
-    });
+    db.accessLog.updateMany({ data: logs });
   }
 }
