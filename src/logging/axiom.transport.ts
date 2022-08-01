@@ -11,16 +11,16 @@ export class AxiomTransport extends Transport {
 
     switch (level as LogLevel) {
       case "error":
-        log.error(message, props);
+        log.error(message);
         break;
       case "warn":
-        log.warn(message, props);
+        log.warn(message);
         break;
       case "info":
-        log.info(message, props);
+        log.info(message);
         break;
       case "debug":
-        log.debug(message, props);
+        log.debug(message);
         break;
     }
 
