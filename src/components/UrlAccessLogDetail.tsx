@@ -1,4 +1,4 @@
-import { Typography, Grid, Divider, Box } from "@mui/material";
+import { Typography, Grid, Divider } from "@mui/material";
 import { AccessLog } from "@prisma/client";
 import { getTimePassed } from "@utils/getPassedTime";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -11,6 +11,7 @@ import DateRangeIcon from "@mui/icons-material/DateRange";
 import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
 import { Detail } from "./Detail";
 import { ToggleHidden } from "./ToggleHidden";
+import { Wrap } from "./Wrap";
 
 export interface UrlAccessLogDetailProps {
   log: AccessLog;
@@ -77,19 +78,5 @@ export function UrlAccessLogDetail({ log }: UrlAccessLogDetailProps) {
         <Divider />
       </Grid>
     </>
-  );
-}
-
-function Wrap({ children }: React.PropsWithChildren) {
-  return (
-    <Box
-      width={"100%"}
-      display="flex"
-      flexDirection={"row"}
-      py={"8px"}
-      alignItems="center"
-    >
-      {children}
-    </Box>
   );
 }

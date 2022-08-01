@@ -8,7 +8,7 @@ export interface DetailProps extends React.PropsWithChildren {
 }
 
 export function Detail({ icon, title, children }: DetailProps) {
-  const matches = useMediaQuery("(min-width:150px)");
+  const matches = useMediaQuery("(min-width:600px)");
   const isDarkMode = useIsDarkMode();
   const theme = useTheme();
 
@@ -32,7 +32,7 @@ export function Detail({ icon, title, children }: DetailProps) {
           backgroundColor: isDarkMode
             ? "rgba(255, 255, 255, 0.03)"
             : "rgba(0, 0, 0, 0.08)",
-          borderRadius: 10,
+          borderRadius: 5,
         },
       }}
     >

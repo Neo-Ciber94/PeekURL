@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 
 export interface PageTitleProps {
   startText: string;
-  endText: string;
+  endText?: string;
 }
 
 export function PageTitle({ startText, endText }: PageTitleProps) {
@@ -22,14 +22,16 @@ export function PageTitle({ startText, endText }: PageTitleProps) {
       <Typography variant="h5" fontWeight="bold" whiteSpace={"pre"}>
         {startText}
       </Typography>
-      <Typography
-        variant="h5"
-        fontWeight="bold"
-        color="primary"
-        whiteSpace={"pre"}
-      >
-        {endText}
-      </Typography>
+      {endText && (
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          color="primary"
+          whiteSpace={"pre"}
+        >
+          {endText}
+        </Typography>
+      )}
     </Box>
   );
 }

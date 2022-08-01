@@ -30,9 +30,12 @@ export default function UrlPage() {
       </PageCard>
 
       {data && data.logs && data.logs.length > 0 && (
-        <PageCard p={4}>
-          <ShortUrlLogDetails logs={data.logs || []} />
-        </PageCard>
+        <>
+          <PageTitle startText={"Logs"} />
+          <PageCard p={4}>
+            <ShortUrlLogDetails logs={data.logs || []} />
+          </PageCard>
+        </>
       )}
     </>
   );
