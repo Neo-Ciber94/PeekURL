@@ -7,14 +7,14 @@ export default function PageCard({
 }: React.PropsWithChildren<BoxProps>) {
   return (
     <Box
-      {...rest}
       boxShadow={"rgba(149, 157, 165, 0.1) 0px 8px 24px"}
       borderRadius={"20px"}
       display="flex"
       flexDirection="column"
       justifyContent={"center"}
-      my={3}
+      mt={2}
       mx={[0, 0, 10]}
+      {...rest}
     >
       {children}
     </Box>

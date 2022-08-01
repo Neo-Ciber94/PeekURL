@@ -35,7 +35,7 @@ export default function IndexPage() {
   return (
     <>
       <AppHead name="Shorten URL" />
-      <PageCard height={300} px={[3, 5, 5]}>
+      <PageCard height={300} px={[3, 5, 5]} mt={10}>
         <Typography variant="h5" mb={1}>
           Shorten an URL
         </Typography>

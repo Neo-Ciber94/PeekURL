@@ -65,7 +65,7 @@ function getIp(req: NextApiRequest): string | undefined {
 }
 
 function getUserAgent(req: NextApiRequest): string | undefined {
-  const userAgent = req.headers["x-forwarded-for"];
+  const userAgent = req.headers["user-agent"];
 
   if (Array.isArray(userAgent)) {
     return userAgent.join(", ");

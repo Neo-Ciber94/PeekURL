@@ -9,7 +9,13 @@ export function PageTitle({ startText, endText }: PageTitleProps) {
   const theme = useTheme();
 
   return (
-    <Box px={10} pt={5} display="flex" flexDirection="row" alignItems="center">
+    <Box
+      px={[0, 0, 10]}
+      pt={5}
+      display="flex"
+      flexDirection="row"
+      alignItems="center"
+    >
       <Box
         width="5px"
         height={40}

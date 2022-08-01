@@ -4,6 +4,7 @@ header {
 
 body {
   transition: background-color 500ms !important;
+  padding-bottom: 50px;
 }
 
 button.social-login-dark-button {

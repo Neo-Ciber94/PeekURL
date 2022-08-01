@@ -12,12 +12,24 @@ import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
 import { Detail } from "./Detail";
 import { ToggleHidden } from "./ToggleHidden";
 import { Wrap } from "./Wrap";
+import { useMemo } from "react";
+
+export enum AccessLogDetailMode {
+  Simple = "simple",
+  Detailed = "detailed",
+}
 
 export interface UrlAccessLogDetailProps {
   log: AccessLog;
+  mode: AccessLogDetailMode;
 }
 
-export function UrlAccessLogDetail({ log }: UrlAccessLogDetailProps) {
+export function UrlAccessLogDetail({ log, mode }: UrlAccessLogDetailProps) {
+  const isDetailed = useMemo(
+    () => mode === AccessLogDetailMode.Detailed,
+    [mode]
+  );
+
   return (
     <>
       <Detail icon={<AccessTimeIcon />} title="Since">
@@ -32,11 +44,13 @@ export function UrlAccessLogDetail({ log }: UrlAccessLogDetailProps) {
         </Wrap>
       </Detail>
 
-      <Detail icon={<DnsIcon />} title="IP">
-        <ToggleHidden>
-          <Typography>{log.ipAddress || "N/A"}</Typography>
-        </ToggleHidden>
-      </Detail>
+      {isDetailed && (
+        <Detail icon={<DnsIcon />} title="IP">
+          <ToggleHidden>
+            <Typography>{log.ipAddress || "N/A"}</Typography>
+          </ToggleHidden>
+        </Detail>
+      )}
 
       <Detail icon={<PublicIcon />} title="Country">
         <ToggleHidden>
@@ -44,35 +58,45 @@ export function UrlAccessLogDetail({ log }: UrlAccessLogDetailProps) {
         </ToggleHidden>
       </Detail>
 
-      <Detail icon={<LocationCityIcon />} title="City">
-        <ToggleHidden>
-          <Typography>{log.city || "N/A"}</Typography>
-        </ToggleHidden>
-      </Detail>
+      {isDetailed && (
+        <Detail icon={<LocationCityIcon />} title="City">
+          <ToggleHidden>
+            <Typography>{log.city || "N/A"}</Typography>
+          </ToggleHidden>
+        </Detail>
+      )}
 
-      <Detail icon={<SouthAmericaIcon />} title="Region">
-        <ToggleHidden>
-          <Typography>{log.region || "N/A"}</Typography>
-        </ToggleHidden>
-      </Detail>
+      {isDetailed && (
+        <Detail icon={<SouthAmericaIcon />} title="Region">
+          <ToggleHidden>
+            <Typography>{log.region || "N/A"}</Typography>
+          </ToggleHidden>
+        </Detail>
+      )}
 
-      <Detail icon={<LanguageIcon />} title="Latitude">
-        <ToggleHidden>
-          <Typography>{log.latitude || "N/A"}</Typography>
-        </ToggleHidden>
-      </Detail>
+      {isDetailed && (
+        <Detail icon={<LanguageIcon />} title="Latitude">
+          <ToggleHidden>
+            <Typography>{log.latitude || "N/A"}</Typography>
+          </ToggleHidden>
+        </Detail>
+      )}
 
-      <Detail icon={<LanguageIcon />} title="Longitude">
-        <ToggleHidden>
-          <Typography>{log.longitude || "N/A"}</Typography>
-        </ToggleHidden>
-      </Detail>
+      {isDetailed && (
+        <Detail icon={<LanguageIcon />} title="Longitude">
+          <ToggleHidden>
+            <Typography>{log.longitude || "N/A"}</Typography>
+          </ToggleHidden>
+        </Detail>
+      )}
 
-      <Detail icon={<MobileScreenShareIcon />} title="User Agent">
-        <ToggleHidden>
-          <Typography>{log.userAgent || "N/A"}</Typography>
-        </ToggleHidden>
-      </Detail>
+      {isDetailed && (
+        <Detail icon={<MobileScreenShareIcon />} title="User Agent">
+          <ToggleHidden>
+            <Typography>{log.userAgent || "N/A"}</Typography>
+          </ToggleHidden>
+        </Detail>
+      )}
 
       <Grid item xs={12} marginY={1}>
         <Divider />
