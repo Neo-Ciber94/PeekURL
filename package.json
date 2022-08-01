@@ -37,6 +37,7 @@
     "firebase-admin": "^11.0.0",
     "nanoid": "^4.0.0",
     "next": "^12.2.3",
+    "next-axiom": "^0.11.0",
     "node-fetch": "^2.6.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -49,6 +50,7 @@
     "superjson": "^1.9.1",
     "vercel": "^27.3.3",
     "winston": "^3.8.1",
+    "winston-transport": "^4.5.0",
     "zod": "^3.17.3"
   },
   "devDependencies": {
