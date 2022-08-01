@@ -71,7 +71,7 @@ class IpLookUpRedisService extends RedisService<IpGeolocationInfo> {
 }
 
 const IP_STACK_URL = "http://api.ipstack.com";
-const ipLookUpRedisService = new IpLookUpRedisService();
+const redisService = new IpLookUpRedisService();
 
 export class IpLookUpService {
   async getIpGeolocation(ip: string): Promise<IpGeolocationInfo | null> {
@@ -84,23 +84,23 @@ export class IpLookUpService {
       return null;
     }
 
-    let result = await ipLookUpRedisService.get(ip);
-
-    if (result) {
-      logger.info(`Cache hit for ${ip}`);
-      return result;
-    }
-
-    logger.info(`Cache miss for ${ip}`);
-
-    const apiKey = Config.IP_STACK_API_KEY;
-    const url = `${IP_STACK_URL}/${ip}?access_key=${apiKey}`;
-
     try {
+      let result = await redisService.get(ip);
+
+      if (result) {
+        logger.info(`Cache hit for ${ip}`);
+        return result;
+      }
+
+      logger.info(`Cache miss for ${ip}`);
+
+      const apiKey = Config.IP_STACK_API_KEY;
+      const url = `${IP_STACK_URL}/${ip}?access_key=${apiKey}`;
       const res = await fetch(url);
+
       result = (await res.json()) as IpGeolocationInfo;
-      await ipLookUpRedisService.set(ip, result);
-      logger.info(`Save geolocation info for ${ip}`);
+      await redisService.set(ip, result);
+      logger.info(`Cached geolocation info for ${ip}`);
       return result as IpGeolocationInfo;
     } catch (err) {
       logger.error(err);
