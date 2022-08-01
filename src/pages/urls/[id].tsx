@@ -36,7 +36,7 @@ export default function UrlPage() {
   return (
     <>
       <AppHead name="View URL" />
-      <PageTitle startText={"URL :: "} endText={id} />
+      <PageTitle startText={"URL :: "} endText={id} backTo="/urls" />
       <PageCard p={4}>
         {(!data || isLoading) && <Loading />}
         {data && <ShortUrlDetails data={data} />}

@@ -22,7 +22,7 @@ export default function UrlListPage() {
   return (
     <>
       <AppHead name="My URLs" />
-      <PageTitle startText="My " endText="URLS" />
+      <PageTitle startText="My " endText="URLS" backTo="/" />
       <PageCard p={4}>
         {isLoading && <Loading />}
         {!isLoading && data && (
