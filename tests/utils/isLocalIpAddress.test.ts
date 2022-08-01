@@ -8,9 +8,7 @@ test("isLocalIpAddress", () => {
   expect(isLocalIpAddress("::ffff:127.0.0.1")).toBeTruthy();
 });
 
-test("isLocalIpAddress with port", () => {
-  expect(isLocalIpAddress("localhost:3000")).toBeTruthy();
-  expect(isLocalIpAddress("127.0.0.1:5000")).toBeTruthy();
-  expect(isLocalIpAddress("::1:4000")).toBeTruthy();
-  expect(isLocalIpAddress("::ffff:127.0.0.1:6999")).toBeTruthy();
+test("isLocalIpAddress invalid ip", () => {
+  expect(isLocalIpAddress("8.8.8.8")).toBeFalsy();
+  expect(isLocalIpAddress("104.26.11.194")).toBeFalsy();
 });
