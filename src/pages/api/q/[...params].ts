@@ -55,13 +55,16 @@ const handler: NextApiHandler = async (req, res) => {
 };
 
 function getIp(req: NextApiRequest): string | undefined {
-  let forwarded = req.headers["x-forwarded-for"];
+  let ip =
+    req.headers["x-forwarded-for"] ||
+    req.headers["x-real-ip"] ||
+    req.socket.remoteAddress;
 
-  if (Array.isArray(forwarded)) {
-    forwarded = forwarded[0];
+  if (Array.isArray(ip)) {
+    ip = ip[0];
   }
 
-  return forwarded ? forwarded.split(/, /)[0] : req.socket.remoteAddress;
+  return ip?.split(",")[0].trim();
 }
 
 function getUserAgent(req: NextApiRequest): string | undefined {

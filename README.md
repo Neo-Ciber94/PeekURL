@@ -11,7 +11,7 @@ TODO!
 ## TODO
 
 - [ ] Improve UI
-  - [ ] Add breadcrumbs or improved navigation
+  - [x] Add breadcrumbs or improved navigation
   - [ ] Add transition animations
   - [ ] Add entrance animation for items
 - [ ] Filters for "My URLs"
