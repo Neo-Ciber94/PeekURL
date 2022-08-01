@@ -35,6 +35,7 @@
     "@types/fs-extra": "^9.0.13",
     "firebase": "^9.9.0",
     "firebase-admin": "^11.0.0",
+    "ioredis": "^5.2.2",
     "nanoid": "^4.0.0",
     "next": "^12.2.3",
     "next-axiom": "^0.11.0",

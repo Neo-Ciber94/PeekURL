@@ -1,140 +1,176 @@
 import redisInstance from "src/database/redis";
-import superjson from 'superjson';
+import superjson from "superjson";
 
 export type Transformer = {
-    parse: <T = unknown>(json: string) => T;
-    stringify: (obj: unknown) => string;
-}
+  parse: <T = unknown>(json: string) => T;
+  stringify: (obj: unknown) => string;
+};
 
 export interface RedisServiceOptions {
-    baseKey: string;
-    transform?: Transformer
+  baseKey: string;
+  transform?: Transformer;
 }
 
 export type RedisSetOptions = {
-    expiresInSeconds?: number;
-}
+  expiresInSeconds?: number;
+};
 
 export type GetOrSetFactory<T> = (key: string) => T;
 
 export class RedisService<T> {
-    private readonly transformer: Transformer;
-    private readonly baseKey: string;
+  private readonly transformer: Transformer;
+  private readonly baseKey: string;
 
-    constructor(options: RedisServiceOptions) {
-        if (options.baseKey.trim().length === 0) {
-            throw new Error("Base key cannot be empty");
+  constructor(options: RedisServiceOptions) {
+    if (options.baseKey.trim().length === 0) {
+      throw new Error("Base key cannot be empty");
+    }
+
+    this.transformer = options.transform || defaultTransformer();
+    this.baseKey = options.baseKey;
+  }
+
+  async get(key: string): Promise<T | null> {
+    const json = await redisInstance.get(this.keyFor(key));
+
+    if (json == null) {
+      return null;
+    }
+
+    const obj = this.transformer.parse<T>(json);
+    return obj;
+  }
+
+  async *getAllAsIterator(): AsyncIterable<T> {
+    // const scanIterator = redisInstance.scan({
+    //   MATCH: `${this.baseKey}/*`,
+    // });
+
+    // for await (const key of scanIterator) {
+    //   const json = await redisInstance.get(key);
+
+    //   if (json) {
+    //     const obj = this.transformer.parse<T>(json);
+    //     yield obj;
+    //   }
+    // }
+
+    let cursor = 0;
+
+    while (true) {
+      const [cursorString, keys] = await redisInstance.scan(
+        cursor,
+        "MATCH",
+        `${this.baseKey}/*`
+      );
+
+      for (const key of keys) {
+        const json = await redisInstance.get(key);
+
+        if (json) {
+          const obj = this.transformer.parse<T>(json);
+          yield obj;
         }
+      }
 
-        this.transformer = options.transform || defaultTransformer();
-        this.baseKey = options.baseKey;
+      cursor = Number(cursorString);
+
+      if (Number.isNaN(cursor) || cursor === 0) {
+        break;
+      }
+    }
+  }
+
+  async getAll(): Promise<T[]> {
+    const result: T[] = [];
+
+    for await (const value of this.getAllAsIterator()) {
+      result.push(value);
     }
 
-    async get(key: string): Promise<T | null> {
-        const json = await redisInstance.get(this.keyFor(key));
+    return result;
+  }
 
-        if (json == null) {
-            return null;
-        }
+  async set(
+    key: string,
+    value: T,
+    options: RedisSetOptions = {}
+  ): Promise<T | null> {
+    const keyString = this.keyFor(key);
+    const valueString = this.transformer.stringify(value);
 
-        const obj = this.transformer.parse<T>(json);
-        return obj;
+    let json: string | null;
+
+    if (options.expiresInSeconds) {
+      json = await redisInstance.setex(
+        key,
+        options.expiresInSeconds,
+        valueString
+      );
+    } else {
+      json = await redisInstance.set(keyString, valueString);
     }
 
-    async *getAllAsIterator(): AsyncIterable<T> {
-        const scanIterator = redisInstance.scanIterator({
-            MATCH: `${this.baseKey}/*`
-        });
-
-        for await (const key of scanIterator) {
-            const json = await redisInstance.get(key);
-
-            if (json) {
-                const obj = this.transformer.parse<T>(json);
-                yield obj;
-            }
-        }
+    if (json == null) {
+      return null;
     }
 
-    async getAll(): Promise<T[]> {
-        const result: T[] = [];
+    const obj = this.transformer.parse<T>(json);
+    return obj;
+  }
 
-        for await (const value of this.getAllAsIterator()) {
-            result.push(value);
-        }
+  async remove(key: string): Promise<T | null> {
+    const json = await redisInstance.getdel(this.keyFor(key));
 
-        return result;
+    if (json == null) {
+      return null;
     }
 
-    async set(key: string, value: T, options: RedisSetOptions = {}): Promise<T | null> {
-        const keyString = this.keyFor(key);
-        const valueString = this.transformer.stringify(value);
+    const obj = this.transformer.parse<T>(json);
+    return obj;
+  }
 
-        let json: string | null;
+  ///// Utilities
 
-        if (options.expiresInSeconds) {
-            json = await redisInstance.setEx(key, options.expiresInSeconds, valueString);
-        } else {
-            json = await redisInstance.set(keyString, valueString);
-        }
+  async getAllByQuery(predicate: (value: T) => boolean): Promise<T[]> {
+    const result: T[] = [];
 
-        if (json == null) {
-            return null;
-        }
-
-        const obj = this.transformer.parse<T>(json);
-        return obj;
+    for await (const value of this.getAllAsIterator()) {
+      if (predicate(value)) {
+        result.push(value);
+      }
     }
 
-    async remove(key: string): Promise<T | null> {
-        const json = await redisInstance.getDel(this.keyFor(key));
+    return result;
+  }
 
-        if (json == null) {
-            return null;
-        }
+  async getOrSet(
+    key: string,
+    factory: (key: string) => Promise<T> | T
+  ): Promise<T> {
+    let result = await this.get(key);
 
-        const obj = this.transformer.parse<T>(json);
-        return obj;
+    if (result == null) {
+      result = await factory(key);
+      await this.set(key, result);
     }
 
-    ///// Utilities
+    return result!;
+  }
 
-    async getAllByQuery(predicate: (value: T) => boolean): Promise<T[]> {
-        const result: T[] = [];
+  async exists(key: string): Promise<boolean> {
+    const result = await redisInstance.exists(this.keyFor(key));
+    return result > 0;
+  }
 
-        for await (const value of this.getAllAsIterator()) {
-            if (predicate(value)) {
-                result.push(value);
-            }
-        }
-
-        return result;
-    }
-
-    async getOrSet(key: string, factory: (key: string) => Promise<T> | T): Promise<T> {
-        let result = await this.get(key);
-
-        if (result == null) {
-            result = await factory(key);
-            await this.set(key, result);
-        }
-
-        return result!;
-    }
-
-    async exists(key: string): Promise<boolean> {
-        const result = await redisInstance.exists(this.keyFor(key));
-        return result > 0;
-    }
-
-    private keyFor(key: string): string {
-        return `${this.baseKey}:${key}`;
-    }
+  private keyFor(key: string): string {
+    return `${this.baseKey}:${key}`;
+  }
 }
 
 function defaultTransformer(): Transformer {
-    return {
-        parse: superjson.parse,
-        stringify: superjson.stringify,
-    };
+  return {
+    parse: superjson.parse,
+    stringify: superjson.stringify,
+  };
 }

@@ -13,5 +13,15 @@ export const Config = Object.freeze({
   BASE_URL: baseUrl,
   API_URL: `${baseUrl}/api`,
   IP_STACK_API_KEY: process.env.IP_STACK_API_KEY,
-  REDIS_URL: process.env.REDIS_URL,
+  REDIS_URL: getEnvOrThrow("REDIS_URL"),
 });
+
+function getEnvOrThrow(name: string) {
+  const value = process.env[name];
+
+  if (value == null) {
+    throw new Error(`Environment variable '${name}' does not exist`);
+  }
+
+  return value;
+}
