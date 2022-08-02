@@ -1,11 +1,11 @@
-import { Config } from "src/config";
+import { localConfig } from "src/config/local.config";
 import * as winston from "winston";
 import Transport from "winston-transport";
 import { AxiomTransport } from "./axiom.transport";
 
 const customTransports: Transport[] = [];
 
-if (Config.isVercel) {
+if (localConfig.isVercel) {
   customTransports.push(new AxiomTransport());
 }
 

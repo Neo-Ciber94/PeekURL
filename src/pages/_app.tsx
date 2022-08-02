@@ -5,12 +5,12 @@ import { Provider } from "react-redux";
 import Authorized from "src/components/Authorized";
 import ClientOnly from "src/components/ClientOnly";
 import ErrorBoundary from "src/components/ErrorBoundary";
+import { localConfig } from "src/config/local.config";
 import { AuthContextProvider } from "src/contexts/AuthContext";
 import { ColorModeProvider } from "src/contexts/ColorModeContext";
 import { store } from "src/redux/store";
 import { getUserIdToken } from "src/stores/user.store";
 import superjson from "superjson";
-import { Config } from "../config";
 import MainLayout from "../layout/MainLayout";
 import { AppRouter } from "../server/routers/app.router";
 import "../styles/styles.css";
@@ -51,7 +51,7 @@ export default withTRPC<AppRouter>({
       };
     }
 
-    const url = `${Config.API_URL}/trpc`;
+    const url = `${localConfig.API_URL}/trpc`;
 
     return {
       url,
