@@ -1,9 +1,11 @@
 import fetch from "node-fetch";
-import { Config } from "src/config";
+import { serverConfig } from "src/config/server.config";
 import logger from "src/logging";
 import { RedisService } from "./redis/redis.service";
 import net from "net";
 import { isLocalIpAddress } from "@utils/isLocalIpAddress";
+import redisInstance from "src/database/redis";
+import { localConfig } from "src/config/local.config";
 
 export interface Language {
   code: string;
@@ -66,6 +68,7 @@ class IpLookUpRedisService extends RedisService<IpGeolocationInfo> {
   constructor() {
     super({
       baseKey: "ipstack-ip-geolocation-info",
+      client: redisInstance,
     });
   }
 }
@@ -77,7 +80,7 @@ export class IpLookUpService {
   async getIpGeolocation(ip: string): Promise<IpGeolocationInfo | null> {
     // To prevent send an invalid ip address
     if (!net.isIP(ip) || isLocalIpAddress(ip)) {
-      if (Config.isDevelopment) {
+      if (localConfig.isDevelopment) {
         logger.debug(`Cannot get ip geolocation info from local host: ${ip}`);
       }
 
@@ -94,7 +97,7 @@ export class IpLookUpService {
 
       logger.info(`Cache miss for ${ip}`);
 
-      const apiKey = Config.IP_STACK_API_KEY;
+      const apiKey = serverConfig.IP_STACK_API_KEY;
       const url = `${IP_STACK_URL}/${ip}?access_key=${apiKey}`;
       const res = await fetch(url);
 

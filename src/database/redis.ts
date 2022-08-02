@@ -1,15 +1,15 @@
 import Redis from "ioredis";
-import { Config } from "src/config";
+import { serverConfig } from "src/config/server.config";
 import logger from "src/logging";
 
-const redisInstance = new Redis(Config.REDIS_URL);
+const redisInstance = new Redis(serverConfig.REDIS_URL);
 
 redisInstance.on("ready", () => {
   logger.info(`Redis client is ready`);
 });
 
 redisInstance.on("connect", () => {
-  logger.info(`Redis client is connected to ${Config.REDIS_URL}`);
+  logger.info(`Redis client is connected to ${serverConfig.REDIS_URL}`);
 });
 
 redisInstance.on("close", () => {

@@ -1,4 +1,4 @@
-import redisInstance from "src/database/redis";
+import Redis from "ioredis";
 import superjson from "superjson";
 
 export type Transformer = {
@@ -7,6 +7,7 @@ export type Transformer = {
 };
 
 export interface RedisServiceOptions {
+  client: Redis;
   baseKey: string;
   transform?: Transformer;
 }
@@ -18,6 +19,7 @@ export type RedisSetOptions = {
 export type GetOrSetFactory<T> = (key: string) => T;
 
 export class RedisService<T> {
+  private readonly client: Redis;
   private readonly transformer: Transformer;
   private readonly baseKey: string;
 
@@ -26,12 +28,13 @@ export class RedisService<T> {
       throw new Error("Base key cannot be empty");
     }
 
+    this.client = options.client;
     this.transformer = options.transform || defaultTransformer();
     this.baseKey = options.baseKey;
   }
 
   async get(key: string): Promise<T | null> {
-    const json = await redisInstance.get(this.keyFor(key));
+    const json = await this.client.get(this.keyFor(key));
 
     if (json == null) {
       return null;
@@ -42,30 +45,17 @@ export class RedisService<T> {
   }
 
   async *getAllAsIterator(): AsyncIterable<T> {
-    // const scanIterator = redisInstance.scan({
-    //   MATCH: `${this.baseKey}/*`,
-    // });
-
-    // for await (const key of scanIterator) {
-    //   const json = await redisInstance.get(key);
-
-    //   if (json) {
-    //     const obj = this.transformer.parse<T>(json);
-    //     yield obj;
-    //   }
-    // }
-
     let cursor = 0;
 
     while (true) {
-      const [cursorString, keys] = await redisInstance.scan(
+      const [cursorString, keys] = await this.client.scan(
         cursor,
         "MATCH",
         `${this.baseKey}/*`
       );
 
       for (const key of keys) {
-        const json = await redisInstance.get(key);
+        const json = await this.client.get(key);
 
         if (json) {
           const obj = this.transformer.parse<T>(json);
@@ -102,13 +92,13 @@ export class RedisService<T> {
     let json: string | null;
 
     if (options.expiresInSeconds) {
-      json = await redisInstance.setex(
+      json = await this.client.setex(
         key,
         options.expiresInSeconds,
         valueString
       );
     } else {
-      json = await redisInstance.set(keyString, valueString);
+      json = await this.client.set(keyString, valueString);
     }
 
     if (json == null) {
@@ -120,7 +110,7 @@ export class RedisService<T> {
   }
 
   async remove(key: string): Promise<T | null> {
-    const json = await redisInstance.getdel(this.keyFor(key));
+    const json = await this.client.getdel(this.keyFor(key));
 
     if (json == null) {
       return null;
@@ -128,6 +118,10 @@ export class RedisService<T> {
 
     const obj = this.transformer.parse<T>(json);
     return obj;
+  }
+
+  close() {
+    this.client.disconnect();
   }
 
   ///// Utilities
@@ -159,7 +153,7 @@ export class RedisService<T> {
   }
 
   async exists(key: string): Promise<boolean> {
-    const result = await redisInstance.exists(this.keyFor(key));
+    const result = await this.client.exists(this.keyFor(key));
     return result > 0;
   }
 

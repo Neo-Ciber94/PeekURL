@@ -47,7 +47,6 @@
     "react-redux": "^8.0.2",
     "react-social-login-buttons": "^3.6.0",
     "react-spring": "^9.5.2",
-    "redis": "^4.2.0",
     "superjson": "^1.9.1",
     "vercel": "^27.3.3",
     "winston": "^3.8.1",
@@ -55,6 +54,7 @@
     "zod": "^3.17.3"
   },
   "devDependencies": {
+    "testcontainers": "^8.12.0",
     "@types/express": "^4.17.13",
     "@types/geoip-lite": "^1.4.1",
     "@types/node": "18.0.4",
