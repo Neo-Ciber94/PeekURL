@@ -2,7 +2,21 @@ import Redis from "ioredis";
 import { serverConfig } from "src/config/server.config";
 import logger from "src/logging";
 
-const redisInstance = new Redis(serverConfig.REDIS_URL);
+declare global {
+  // eslint-disable-next-line no-var
+  var redis: Redis | undefined;
+}
+
+console.log(serverConfig.REDIS_URL);
+let redisInstance: Redis;
+
+if (!global.redis) {
+  global.redis = new Redis(serverConfig.REDIS_URL, {
+    family: 6,
+  });
+}
+
+redisInstance = global.redis;
 
 redisInstance.on("ready", () => {
   logger.info(`Redis client is ready`);

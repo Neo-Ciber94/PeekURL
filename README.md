@@ -31,3 +31,4 @@ TODO!
   > Not sure about letting to disable URL, maybe after X time, for example 1 hour or week.
 - [ ] Check performance when shortening URL, the bottleneck may be the database.
 - [ ] More clean user errors
+- [ ] Error when accesing URL with new user

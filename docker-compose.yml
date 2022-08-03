@@ -24,10 +24,13 @@ services:
     ports:
       - 6030:6379
     environment:
-      - REDIS_PASSWORD="redispassword123"
+      - REDIS_PASSWORD=redispassword123
     volumes:
       - redis_data:/data
-    command: "redis-server --appendonly yes --requirepass $${REDIS_PASSWORD}"
+    command:
+      - /bin/sh
+      - -c
+      - "redis-server --appendonly yes --requirepass $${REDIS_PASSWORD?:REDIS_PASSWORD is no set}"
 
 volumes:
   db_data:

@@ -1,5 +1,7 @@
+type Nullable<T> = T | null | undefined;
+
 export function assertNotNull<T>(
-  valueOrFactory: T | (() => T),
+  valueOrFactory: Nullable<T> | (() => Nullable<T>),
   message?: string
 ): T {
   if (typeof valueOrFactory === "function") {
