@@ -80,7 +80,7 @@ export class IpLookUpService {
   async getIpGeolocation(ip: string): Promise<IpGeolocationInfo | null> {
     // To prevent send an invalid ip address
     if (!net.isIP(ip) || isLocalIpAddress(ip)) {
-      if (localConfig.isDevelopment) {
+      if (localConfig.IS_DEVELOPMENT) {
         logger.debug(`Cannot get ip geolocation info from local host: ${ip}`);
       }
 

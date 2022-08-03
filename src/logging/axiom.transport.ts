@@ -7,7 +7,8 @@ type LogLevel = keyof Pick<winston.Logger, "error" | "warn" | "info" | "debug">;
 export class AxiomTransport extends Transport {
   log(info: winston.LogEntry, next: () => void) {
     setImmediate(() => this.emit("logged", info));
-    const { level, message, exception, stack, ...props } = info;
+    // const { level, message, exception, stack, ...props } = info;
+    const { level, message } = info;
 
     switch (level as LogLevel) {
       case "error":

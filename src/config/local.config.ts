@@ -8,8 +8,8 @@ const environment = process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NODE_ENV;
  * Shared configurations.
  */
 export const localConfig = Object.freeze({
-  isDevelopment: environment === "development",
-  isVercel: vercelUrl != null,
+  IS_DEVELOPMENT: environment === "development",
+  IS_VERCEL: vercelUrl != null,
   BASE_URL: baseUrl,
   API_URL: `${baseUrl}/api`,
 });

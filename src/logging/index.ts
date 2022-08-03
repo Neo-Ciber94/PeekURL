@@ -5,7 +5,7 @@ import { AxiomTransport } from "./axiom.transport";
 
 const customTransports: Transport[] = [];
 
-if (localConfig.isVercel) {
+if (localConfig.IS_VERCEL) {
   customTransports.push(new AxiomTransport());
 }
 

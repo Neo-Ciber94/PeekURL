@@ -7,7 +7,6 @@ declare global {
   var redis: Redis | undefined;
 }
 
-console.log(serverConfig.REDIS_URL);
 let redisInstance: Redis;
 
 if (!global.redis) {
