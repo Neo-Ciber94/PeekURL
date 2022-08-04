@@ -32,3 +32,4 @@ TODO!
 - [ ] Check performance when shortening URL, the bottleneck may be the database.
 - [ ] More clean user errors
 - [ ] Error when accessing URL with new user
+- [ ] Infinite scrolling to access logs
