@@ -1,5 +1,5 @@
 // prettier-ignore
-const vercelUrl = process.env.VERCEL_APP_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
+const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_APP_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
 const baseUrl = vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000";
 const environment = process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.NODE_ENV;
 
