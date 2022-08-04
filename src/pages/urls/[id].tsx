@@ -9,13 +9,17 @@ import {
 import AppHead from "src/components/AppHead";
 import { PageTitle } from "src/components/PageTitle";
 import { Grid } from "@mui/material";
-import { useState } from "react";
 import { AccessLogDetailMode } from "src/components/UrlAccessLogDetail";
 import { LogModeToggle } from "src/components/LogModeToggle";
+import { useLocalStorageState } from "src/hooks/useLocalStorageState";
 
 export default function UrlPage() {
   const { query } = useRouter();
-  const [logMode, setLogMode] = useState(AccessLogDetailMode.Simple);
+  const [logMode, setLogMode] = useLocalStorageState({
+    key: "LOG_MODE",
+    defaultValue: AccessLogDetailMode.Simple,
+  });
+
   const id = query?.id as string;
   const { data, isLoading } = trpc.useQuery([
     "shorturl.get_by_id",
