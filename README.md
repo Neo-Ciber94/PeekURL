@@ -35,6 +35,11 @@ To run locally you require to have:
 
 > You should NOT expose the credentials do not push it to git!
 
+Also set the connection strings of the database and redis in the `.env` file:
+
+- `DATABASE_URL="postgresql://root:password123@localhost:6000/sample"`
+- `REDIS_URL="redis://default:redispassword123@localhost:6030`
+
 After having all that setup run:
 
 1. `docker compose up -d`
