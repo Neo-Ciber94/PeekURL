@@ -96,6 +96,9 @@ export default function Header() {
                 src={user.photoURL || ""}
                 sx={{ cursor: "pointer" }}
                 onClick={(e) => handleClick(e)}
+                imgProps={{
+                  referrerPolicy: "no-referrer",
+                }}
               />
               <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                 <MenuItem onClick={handleLogout} sx={{ width: 120 }}>

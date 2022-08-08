@@ -5,7 +5,6 @@ describe("rangeArray", () => {
   test("array from max", () => {
     const array = rangeArray(5);
 
-    console.log(array);
     expect(array[0]).toStrictEqual(0);
     expect(array[1]).toStrictEqual(1);
     expect(array[2]).toStrictEqual(2);

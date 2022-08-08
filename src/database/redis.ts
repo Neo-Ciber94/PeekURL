@@ -10,9 +10,7 @@ declare global {
 let redisInstance: Redis;
 
 if (!global.redis) {
-  global.redis = new Redis(serverConfig.REDIS_URL, {
-    family: 6,
-  });
+  global.redis = new Redis(serverConfig.REDIS_URL);
 }
 
 redisInstance = global.redis;
