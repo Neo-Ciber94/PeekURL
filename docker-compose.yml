@@ -1,16 +1,14 @@
 services:
 
   db:
-    image: postgres:14.4
+    image: mysql:8.0.29
     restart: always
     ports:
-      - 6000:5432
+      - 6000:3306
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: sample
+      MYSQL_ROOT_PASSWORD: password123
     volumes:
-      - db_data:/var/lib/postgresql
+      - db_data2:/var/lib/mysql
 
   adminer:
     image: adminer
@@ -33,5 +31,5 @@ services:
       - "redis-server --appendonly yes --requirepass $${REDIS_PASSWORD?:REDIS_PASSWORD is no set}"
 
 volumes:
-  db_data:
+  db_data2:
   redis_data:
