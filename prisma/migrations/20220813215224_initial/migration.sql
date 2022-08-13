@@ -38,9 +38,3 @@ CREATE TABLE `AccessLog` (
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- AddForeignKey
-ALTER TABLE `ShortUrl` ADD CONSTRAINT `ShortUrl_createdByUserId_fkey` FOREIGN KEY (`createdByUserId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `AccessLog` ADD CONSTRAINT `AccessLog_shortUrlId_fkey` FOREIGN KEY (`shortUrlId`) REFERENCES `ShortUrl`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
