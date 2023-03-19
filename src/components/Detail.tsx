@@ -1,6 +1,6 @@
 import { Typography, Grid, Box, useMediaQuery, useTheme } from "@mui/material";
 import React, { useMemo } from "react";
-import { useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useIsDarkMode } from "src/client/contexts/ColorModeContext";
 
 export interface DetailProps extends React.PropsWithChildren {
   icon: React.ReactNode;

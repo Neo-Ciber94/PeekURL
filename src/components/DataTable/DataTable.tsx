@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-import { useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useIsDarkMode } from "src/client/contexts/ColorModeContext";
 
 export interface TableColumn<T> {
   header: string;

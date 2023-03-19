@@ -1,10 +1,10 @@
 import fetch from "node-fetch";
 import { serverConfig } from "src/config/server.config";
-import logger from "src/logging";
+import logger from "src/server/logging";
 import { RedisService } from "./redis/redis.service";
 import net from "net";
 import { isLocalIpAddress } from "@utils/isLocalIpAddress";
-import redisInstance from "src/database/redis";
+import redisInstance from "src/server/database/redis";
 import { localConfig } from "src/config/local.config";
 
 export interface Language {

@@ -11,7 +11,7 @@ import { PageTitle } from "src/components/PageTitle";
 import { Grid } from "@mui/material";
 import { AccessLogDetailMode } from "src/components/UrlAccessLogDetail";
 import { LogModeToggle } from "src/components/LogModeToggle";
-import { useLocalStorageState } from "src/hooks/useLocalStorageState";
+import { useLocalStorageState } from "src/client/hooks/useLocalStorageState";
 
 export default function UrlPage() {
   const { query } = useRouter();

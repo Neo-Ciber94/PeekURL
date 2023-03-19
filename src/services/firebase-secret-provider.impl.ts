@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import logger from "src/logging";
+import logger from "src/server/logging";
 import {
   FirebaseSecret,
   IFirebaseSecretProvider,

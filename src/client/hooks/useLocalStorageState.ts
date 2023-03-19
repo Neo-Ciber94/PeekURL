@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PartialRequired } from "src/types/types";
+import { PartialRequired } from "@utils/types/types";
 
 export type ValueOrFactory<T> = T | (() => T);
 

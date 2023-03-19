@@ -1,5 +1,5 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
-import { getFirebaseApp } from "../firebase/firebaseClient";
+import { getFirebaseApp } from "../../firebase/firebaseClient";
 import {
   User,
   getAuth,
@@ -8,7 +8,7 @@ import {
   signInWithRedirect,
   signOut,
 } from "firebase/auth";
-import { useValue } from "src/hooks/useValue";
+import { useValue } from "src/client/hooks/useValue";
 import { userStore } from "src/stores/user.store";
 
 export interface AuthContextProps {

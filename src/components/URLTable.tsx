@@ -2,7 +2,7 @@ import { Badge, Box } from "@mui/material";
 import { DataTable, TableColumn } from "./DataTable/DataTable";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { getTimePassed } from "@utils/getPassedTime";
-import { ShortUrlWithLogs } from "src/types/shorturl";
+import { ShortUrlWithLogs } from "@utils/types/shorturl";
 import { getRedirectUrl } from "@utils/getRedirectUrl";
 import { useMemo } from "react";
 import { CopyButton } from "./CopyButton";

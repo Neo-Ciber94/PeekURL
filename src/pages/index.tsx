@@ -31,6 +31,7 @@ export default function IndexPage() {
       }, 2000);
     }
   };
+  
 
   return (
     <>

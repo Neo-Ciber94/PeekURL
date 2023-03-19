@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { useColorMode, useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useColorMode, useIsDarkMode } from "src/client/contexts/ColorModeContext";
 import { useSpring, animated } from "react-spring";
 
 export function ThemeToggle() {

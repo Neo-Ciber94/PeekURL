@@ -2,8 +2,8 @@ import { Box } from "@mui/material";
 import React from "react";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import AppHead from "src/components/AppHead";
-import { useAuth } from "src/contexts/AuthContext";
-import { useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useAuth } from "src/client/contexts/AuthContext";
+import { useIsDarkMode } from "src/client/contexts/ColorModeContext";
 
 export default function LoginPage() {
   const { login, user } = useAuth();

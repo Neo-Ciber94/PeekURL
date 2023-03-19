@@ -1,7 +1,7 @@
 import firebase, { initializeApp } from "firebase/app";
 import * as firebaseAnalytics from "firebase/analytics";
 import { Analytics } from "firebase/analytics";
-import logger from "src/logging";
+import logger from "src/server/logging";
 import { isBrowser } from "@utils/isBrowser";
 
 const firebaseConfig = {

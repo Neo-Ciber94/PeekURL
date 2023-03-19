@@ -4,7 +4,7 @@ import { getTimePassed } from "@utils/getPassedTime";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
-import { ShortUrlWithLogs } from "src/types/shorturl";
+import { ShortUrlWithLogs } from "@utils/types/shorturl";
 import { getRedirectUrl } from "@utils/getRedirectUrl";
 import { Detail } from "./Detail";
 import { AccessLogDetailMode, UrlAccessLogDetail } from "./UrlAccessLogDetail";

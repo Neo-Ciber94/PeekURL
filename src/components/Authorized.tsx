@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
-import { useAuth } from "src/contexts/AuthContext";
+import { useAuth } from "src/client/contexts/AuthContext";
 import Loading from "./Loading";
 
 export interface AuthorizedProps extends React.PropsWithChildren {

@@ -6,12 +6,12 @@ import Authorized from "src/components/Authorized";
 import ClientOnly from "src/components/ClientOnly";
 import ErrorBoundary from "src/components/ErrorBoundary";
 import { localConfig } from "src/config/local.config";
-import { AuthContextProvider } from "src/contexts/AuthContext";
-import { ColorModeProvider } from "src/contexts/ColorModeContext";
+import { AuthContextProvider } from "src/client/contexts/AuthContext";
+import { ColorModeProvider } from "src/client/contexts/ColorModeContext";
 import { store } from "src/redux/store";
 import { getUserIdToken } from "src/stores/user.store";
 import superjson from "superjson";
-import MainLayout from "../layout/MainLayout";
+import MainLayout from "../client/layout/MainLayout";
 import { AppRouter } from "../server/routers/app.router";
 import "../styles/styles.css";
 

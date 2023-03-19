@@ -8,11 +8,11 @@ import {
   MenuItem,
   styled,
 } from "@mui/material";
-import Logo from "../components/Logo";
+import Logo from "../../components/Logo";
 import Link from "next/link";
-import { useAuth } from "src/contexts/AuthContext";
+import { useAuth } from "src/client/contexts/AuthContext";
 import { useState } from "react";
-import { useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useIsDarkMode } from "src/client/contexts/ColorModeContext";
 import { useRouter } from "next/router";
 import { ThemeToggle } from "src/components/ThemeToggle";
 

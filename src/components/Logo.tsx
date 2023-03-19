@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { Link as MaterialLink } from "@mui/material";
 import Link from "next/link";
-import { useIsDarkMode } from "src/contexts/ColorModeContext";
+import { useIsDarkMode } from "src/client/contexts/ColorModeContext";
 
 export default function Logo() {
   const isDarkMode = useIsDarkMode();

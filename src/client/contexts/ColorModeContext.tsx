@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { usePrefersDarkMode } from "src/hooks/usePrefersDarkMode";
+import { usePrefersDarkMode } from "src/client/hooks/usePrefersDarkMode";
 
 export type ColorMode = "light" | "dark";
 

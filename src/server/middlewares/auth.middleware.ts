@@ -4,7 +4,7 @@ import { AuthorizedContext, Context } from "../context";
 import { getAuth } from 'firebase-admin/auth';
 import { getFirebaseAdmin } from "src/firebase/firebaseAdmin";
 import { User } from "@prisma/client";
-import logger from "src/logging";
+import logger from "src/server/logging";
 
 export const authMiddleware: MiddlewareFunction<Context, AuthorizedContext, {}> = async ({ ctx, next }) => {
     const { prisma } = ctx;

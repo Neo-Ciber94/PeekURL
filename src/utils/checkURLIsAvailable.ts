@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import { localConfig } from "src/config/local.config";
-import logger from "src/logging";
+import logger from "src/server/logging";
 
 /**
  * Checks if the url available.

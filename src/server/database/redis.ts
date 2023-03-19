@@ -1,6 +1,6 @@
 import Redis from "ioredis";
 import { serverConfig } from "src/config/server.config";
-import logger from "src/logging";
+import logger from "src/server/logging";
 
 declare global {
   // eslint-disable-next-line no-var
