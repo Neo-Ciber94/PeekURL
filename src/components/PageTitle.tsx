@@ -17,12 +17,15 @@ export function PageTitle({ startText, endText, backTo }: PageTitleProps) {
       pt={5}
       display="flex"
       flexDirection={matches ? "row" : "column"}
+      justifyContent={"space-between"}
+      alignItems="center"
+      gap={3}
     >
       <Box
         display="flex"
+        whiteSpace={"nowrap"}
         flexDirection={"row"}
         alignItems="center"
-        whiteSpace={"nowrap"}
         overflow="hidden"
         textOverflow="ellipsis"
       >
@@ -35,19 +38,21 @@ export function PageTitle({ startText, endText, backTo }: PageTitleProps) {
           }}
         ></Box>
 
-        <Typography variant="h5" fontWeight="bold" whiteSpace={"pre"}>
-          {startText}
-        </Typography>
-        {endText && (
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            color="primary"
-            whiteSpace={"pre"}
-          >
-            {endText}
+        <Box display="flex" flexDirection={"row"}>
+          <Typography variant="h5" fontWeight="bold" whiteSpace={"pre"}>
+            {startText}
           </Typography>
-        )}
+          {endText && (
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              color="primary"
+              whiteSpace={"pre"}
+            >
+              {endText}
+            </Typography>
+          )}
+        </Box>
       </Box>
 
       {backTo && <BackButton path={backTo} sx={{ marginLeft: "auto" }} />}

@@ -29,7 +29,7 @@ model ShortUrl {
 model AccessLog {
   id             String   @id @default(uuid())
   shortUrlId     String
-  shortUrl       ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrl       ShortUrl @relation(fields: [shortUrlId], references: [id], onDelete: Cascade)
   ipAddress      String?
   userAgent      String?
   country        String?

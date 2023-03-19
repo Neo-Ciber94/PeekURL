@@ -10,7 +10,7 @@ import { PageTitle } from "src/components/PageTitle";
 export default function UrlListPage() {
   const router = useRouter();
 
-  const { data, isLoading, isError } = trpc.useQuery([
+  const { data, isLoading } = trpc.useQuery([
     "shorturl.get_all",
     { includeCount: true },
   ]);

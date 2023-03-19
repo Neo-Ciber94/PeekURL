@@ -11,7 +11,7 @@ export function BackButton({ path, sx }: BackButtonProps) {
   const theme = useTheme();
 
   return (
-    <Link href={path} passHref>
+    <Link href={path} passHref style={{ textDecoration: "none" }}>
       <Box
         display="flex"
         flexDirection="row"

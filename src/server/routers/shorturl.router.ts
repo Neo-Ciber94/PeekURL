@@ -42,6 +42,29 @@ export const urlRouter = createProtectedRouter()
       }
     },
   })
+  .mutation(".delete", {
+    input: z.string(),
+    resolve: async ({ ctx, input }) => {
+      const exists = await ctx.prisma.shortUrl
+        .count({ where: { id: input } })
+        .then((x) => x > 0);
+
+      if (exists === false) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `Short url with id "${input}" does not exist`,
+        });
+      }
+
+      const shortUrl = await ctx.prisma.shortUrl.delete({
+        where: {
+          id: input,
+        },
+      });
+
+      logger.debug(`Short url deleted: '${shortUrl.id}'`);
+    },
+  })
   .query(".get_all", {
     input: z.object({
       includeLogs: z.boolean().optional().default(false),

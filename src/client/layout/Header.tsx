@@ -81,14 +81,14 @@ export default function Header() {
           </Box>
 
           {!user && pathname !== "/login" && (
-            <Link href="/login" passHref>
+            <Link href="/login" passHref style={{ textDecoration: "none" }}>
               <StyledButton>Login</StyledButton>
             </Link>
           )}
 
           {user && (
             <>
-              <Link href="/urls" passHref>
+              <Link href="/urls" passHref style={{ textDecoration: "none" }}>
                 <StyledButton>URLS</StyledButton>
               </Link>
               <Avatar

@@ -9,26 +9,24 @@ export default function Logo() {
   return (
     <Box display="flex" flexDirection="column" justifyContent={"center"}>
       <Typography variant="h6" component="div">
-        <Link href="/" passHref>
-          <MaterialLink underline="none">
-            <Typography
-              component="span"
-              fontFamily="monospace"
-              fontSize={28}
-              color={isDarkMode ? "white" : "black"}
-            >
-              Peek
-            </Typography>
-            <Typography
-              component="span"
-              fontFamily="monospace"
-              fontSize={28}
-              color="primary"
-              fontWeight="bold"
-            >
-              URL
-            </Typography>
-          </MaterialLink>
+        <Link href="/" passHref style={{ textDecoration: "none" }}>
+          <Typography
+            component="span"
+            fontFamily="monospace"
+            fontSize={28}
+            color={isDarkMode ? "white" : "black"}
+          >
+            Peek
+          </Typography>
+          <Typography
+            component="span"
+            fontFamily="monospace"
+            fontSize={28}
+            color="primary"
+            fontWeight="bold"
+          >
+            URL
+          </Typography>
         </Link>
       </Typography>
     </Box>
