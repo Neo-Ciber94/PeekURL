@@ -2,7 +2,7 @@ import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { GenericContainer, StartedTestContainer } from "testcontainers";
 import Redis from "ioredis";
 import { rangeArray } from "@utils/rangeArray";
-import { RedisService } from "src/services/redis/redis.service";
+import { RedisService } from "src/server/services/redis/redis.service";
 
 interface Item {
   value: string;

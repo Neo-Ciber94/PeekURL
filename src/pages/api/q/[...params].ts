@@ -1,7 +1,7 @@
 import { NextApiHandler, NextApiRequest } from "next";
 import prismaInstance from "../../../server/database/prisma";
 import logger from "../../../server/logging";
-import { ipLookUpService } from "src/services/ip-look-up.service";
+import { ipLookUpService } from "src/server/services/ip-look-up.service";
 
 const PATHNAME = "/api/q";
 

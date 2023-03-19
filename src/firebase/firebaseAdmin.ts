@@ -3,7 +3,7 @@ import firebaseAdmin, {
   cert,
   getApps,
 } from "firebase-admin/app";
-import { getSecretProvider } from "src/services/firebase-secret-provider";
+import { getSecretProvider } from "src/server/services/firebase-secret-provider";
 import logger from "src/server/logging";
 import retry from "@utils/retry";
 

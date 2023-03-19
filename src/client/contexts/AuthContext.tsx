@@ -9,7 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { useValue } from "src/client/hooks/useValue";
-import { userStore } from "src/stores/user.store";
+import { userStore } from "src/client/stores/user.store";
 
 export interface AuthContextProps {
   login: () => Promise<void>;

@@ -1,6 +1,6 @@
 import { AccessLog, PrismaClient } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import { ipLookUpService } from "src/services/ip-look-up.service";
+import { ipLookUpService } from "src/server/services/ip-look-up.service";
 import { ShortUrlWithLogs } from "@utils/types/shorturl";
 import { z } from "zod";
 import logger from "../logging";
